@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0B1F3A">
+<meta name="robots" content="noindex, nofollow">
+<title>Nouvelle Responsabilité — Amadou Bâ</title>
+<meta name="description" content="Démonstration indépendante d'une plateforme numérique pour Nouvelle Responsabilité.">
+<link rel="preload" as="image" href="img/hero-a-m.webp" media="(max-width:720px)">
+<link rel="preload" as="image" href="img/hero-a.webp" media="(min-width:721px)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0B1F3A;--navy-2:#132C50;--navy-3:#06142A;
+  --green:#00853F;--green-2:#00A651;--green-dk:#00612E;
+  --gold:#D4AF37;--gold-lt:#F1D98A;
+  --white:#fff;--mist:#EEF3F8;--line:#D9E2EC;--ink:#0B1F3A;--ink-2:#3D4F69;
+  --display:'Bricolage Grotesque',system-ui,sans-serif;--body:'Instrument Sans',system-ui,sans-serif;
+  --ease:cubic-bezier(.2,.7,.1,1);
+  --sec:clamp(72px,9vw,128px);   /* section rhythm */
+  --pad:clamp(24px,3vw,40px);    /* panel padding */
+  --r:28px;
+  --h2:clamp(38px,5.2vw,80px);
+  --sat:env(safe-area-inset-top,0px);--sab:env(safe-area-inset-bottom,0px);--sal:env(safe-area-inset-left,0px);--sar:env(safe-area-inset-right,0px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--body);color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font:inherit;cursor:pointer;color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.wrap{width:min(1280px,100% - 48px - var(--sal) - var(--sar));margin-inline:auto}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:12px;top:-60px;z-index:100;background:var(--gold);color:var(--navy);padding:10px 16px;border-radius:999px;font-weight:700;text-decoration:none}
+.skip:focus{top:calc(12px + var(--sat))}
+.display{font-family:var(--display);font-weight:800;letter-spacing:-.035em;line-height:.95}
+h2.display{font-size:var(--h2);margin:0}
+.lead{font-size:clamp(17px,1.5vw,20px);line-height:1.65}
+section{position:relative}
+.move-grid>*,.leader-grid>*,.th-grid>*,.rg-grid>*,.join-grid>*,.media-wrap>*,.foot-grid>*,.wf>*,.tools>*,.tl-panel>*{min-width:0}
+
+/* ---------- header ---------- */
+.hdr{position:fixed;inset:0 0 auto;z-index:50;padding-top:var(--sat);transition:transform .45s var(--ease),background .35s,box-shadow .35s}
+.hdr::before{content:"";position:absolute;inset:0 0 -40px;background:linear-gradient(180deg,rgba(6,20,42,.72),rgba(6,20,42,0));pointer-events:none;transition:opacity .3s}
+.hdr.solid::before{opacity:0}
+.hdr-in{position:relative}
+.hdr.solid{background:rgba(11,31,58,.95);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 10px 30px -22px rgba(0,0,0,.7)}
+.hdr.hide{transform:translateY(-100%)}
+.hdr-in{display:flex;align-items:center;justify-content:space-between;gap:16px;height:80px}
+.hdr .logo{display:block;flex:none}
+.hdr .logo img{height:52px;width:auto}
+.nav{display:flex;gap:2px}
+.nav a{color:#fff;text-decoration:none;font-weight:600;font-size:15px;padding:10px 13px;border-radius:999px;transition:background .25s}
+.nav a:hover,.nav a[aria-current="true"]{background:rgba(255,255,255,.13)}
+.hdr-r{display:flex;align-items:center;gap:10px}
+.seg{display:flex;background:rgba(255,255,255,.12);border-radius:999px;padding:4px}
+.seg button{background:none;border:0;color:#fff;font-weight:700;font-size:13px;min-width:44px;min-height:38px;border-radius:999px}
+.seg button[aria-pressed="true"]{background:var(--gold);color:var(--navy)}
+.cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--green);color:#fff;text-decoration:none;font-weight:700;font-size:15px;padding:0 22px;min-height:48px;border-radius:999px;border:0;transition:transform .25s var(--ease),background .25s;white-space:nowrap}
+.cta:hover{background:var(--green-2);transform:translateY(-1px)}
+.cta.gold{background:var(--gold);color:var(--navy)}.cta.gold:hover{background:var(--gold-lt)}
+.cta.ghost{background:transparent;border:2px solid rgba(255,255,255,.65);color:#fff}
+.cta.dark{background:var(--navy)}.cta.dark:hover{background:var(--navy-2)}
+.cta.sm{min-height:40px;padding:0 16px;font-size:14px}
+.icon-btn{display:none;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.14);align-items:center;justify-content:center;color:#fff}
+.lang-m{display:none;position:relative}
+.lang-m>button{min-width:52px;height:40px;border-radius:999px;border:1.5px solid rgba(255,255,255,.4);background:none;color:#fff;font-weight:700;font-size:13px;display:inline-flex;align-items:center;justify-content:center;gap:4px}
+.lang-pop{position:absolute;right:0;top:calc(100% + 8px);background:#fff;border-radius:16px;padding:6px;box-shadow:0 20px 40px -16px rgba(0,0,0,.45);min-width:150px;display:none}
+.lang-pop.open{display:block}
+.lang-pop button{display:flex;justify-content:space-between;width:100%;background:none;border:0;color:var(--ink);padding:12px 14px;border-radius:10px;font-weight:600;font-size:15px;text-align:left}
+.lang-pop button[aria-pressed="true"]{background:var(--mist)}
+.lang-pop button[aria-pressed="true"]::after{content:"✓";color:var(--green)}
+
+/* drawer */
+.drawer{position:fixed;inset:0;z-index:60;background:var(--navy);color:#fff;display:flex;flex-direction:column;padding:calc(14px + var(--sat)) calc(20px + var(--sar)) calc(24px + var(--sab)) calc(20px + var(--sal));opacity:0;visibility:hidden;transition:opacity .3s,visibility 0s .3s;overflow-y:auto}
+.drawer.open{opacity:1;visibility:visible;transition:opacity .3s}
+.drawer-top{display:flex;justify-content:space-between;align-items:center;height:52px}
+.drawer-top img{height:40px;width:auto}
+.drawer nav{display:flex;flex-direction:column;margin-top:28px}
+.drawer nav a{display:flex;justify-content:space-between;align-items:center;font-family:var(--display);font-weight:700;font-size:28px;letter-spacing:-.02em;text-decoration:none;padding:14px 4px;border-bottom:1px solid rgba(255,255,255,.08)}
+.drawer nav a::after{content:"→";font-size:20px;opacity:.4}
+.drawer .foot-d{margin-top:auto;padding-top:28px;display:flex;flex-direction:column;gap:16px}
+.drawer .foot-d .cta{width:100%}
+.drawer .seg{align-self:flex-start}
+
+/* ---------- hero ---------- */
+.hero{height:100vh;height:100svh;min-height:620px;max-height:1200px;overflow:hidden;background:var(--navy-3);color:#fff;isolation:isolate}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 85% 40%,#14335C 0%,var(--navy-3) 60%);z-index:-1}
+.slide{position:absolute;right:0;bottom:0;width:62%;height:min(100%,var(--cap));opacity:0;transition:opacity 1.2s var(--ease);
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 30%),linear-gradient(180deg,transparent 0,#000 18%);mask-image:linear-gradient(90deg,transparent 0,#000 30%),linear-gradient(180deg,transparent 0,#000 18%);-webkit-mask-composite:source-in;mask-composite:intersect}
+.slide.on{opacity:1}
+.slide img{width:100%;height:100%;object-fit:cover}
+.s-a{--cap:1150px}.s-a img{object-position:62% 20%}
+.s-b{--cap:720px}.s-b img{object-position:30% 22%}
+.hero-copy{position:absolute;z-index:2;left:0;right:0;bottom:clamp(56px,11vh,120px)}
+.hero-copy .in{max-width:min(820px,52vw)}
+.kicker{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-lt)}
+.kicker i{display:inline-block;width:30px;height:3px;background:var(--gold);border-radius:3px}
+.hero h1{margin:20px 0 0;font-size:clamp(52px,5.9vw,108px);text-shadow:0 2px 30px rgba(6,20,42,.5)}
+.hero h1 span{display:block;overflow:hidden;padding:0 .12em .04em 0;margin-right:-.12em}
+.hero h1 span b{display:block;font-weight:inherit;transform:translateY(105%);transition:transform 1s var(--ease)}
+.hero.ready h1 span b{transform:none}
+.hero h1 span:nth-child(2) b{transition-delay:.1s;color:#3FD483}.hero h1 span:nth-child(3) b{transition-delay:.2s;color:var(--gold)}
+.hero-sub{margin:26px 0 0;max-width:520px;font-size:clamp(16px,1.35vw,19px);line-height:1.6;color:#DCE4EF;opacity:0;transition:opacity .9s .45s}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px;opacity:0;transition:opacity .9s .55s}
+.hero.ready .hero-sub,.hero.ready .hero-btns{opacity:1}
+.hero-ctrl{position:absolute;z-index:3;right:calc(clamp(24px,4vw,56px) + var(--sar));bottom:clamp(56px,11vh,120px);display:flex;align-items:center;gap:8px}
+.hero-ctrl .dot{width:44px;height:44px;border:0;background:none;display:inline-flex;align-items:center;justify-content:center;padding:0}
+.hero-ctrl .dot i{width:30px;height:3px;border-radius:3px;background:rgba(255,255,255,.35);position:relative;overflow:hidden}
+.hero-ctrl .dot[aria-current="true"] i{background:rgba(255,255,255,.55)}
+.hero-ctrl .dot[aria-current="true"] i::after{content:"";position:absolute;inset:0;background:var(--gold);transform-origin:left;animation:bar 8s linear forwards}
+.hero.paused .hero-ctrl .dot i::after{animation:none;transform:scaleX(1)}
+@keyframes bar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.hero-ctrl .pp{width:40px;height:40px;border-radius:50%;border:1.5px solid rgba(255,255,255,.45);background:none;color:#fff;display:inline-flex;align-items:center;justify-content:center}
+
+/* ---------- movement ---------- */
+.move{background:var(--green);color:#fff;overflow:hidden}
+.marquee{display:flex;white-space:nowrap;border-bottom:1px solid rgba(255,255,255,.18)}
+.marquee div{display:flex;gap:44px;padding:20px 22px;font-family:var(--display);font-weight:800;font-size:clamp(30px,4.4vw,64px);letter-spacing:-.03em;animation:marq 50s linear infinite;flex:none}
+.marquee em{font-style:normal;color:var(--gold-lt)}
+@keyframes marq{to{transform:translateX(-100%)}}
+.move-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;padding:var(--sec) 0;align-items:center}
+.move .lead{margin:26px 0 0;color:#E3F5EA;max-width:600px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:44px;border-top:2px solid rgba(255,255,255,.25)}
+.stat{padding:20px 20px 0 0}
+.stat+.stat{padding-left:20px;border-left:1px solid rgba(255,255,255,.2)}
+.stat b{display:block;font-family:var(--display);font-size:clamp(30px,3vw,46px);font-weight:800;letter-spacing:-.03em}
+.stat span{display:block;margin-top:6px;font-size:14px;line-height:1.45;color:#D7F0E1}
+.emblem{position:relative;aspect-ratio:1;max-width:460px;width:100%;justify-self:center}
+.emblem .disc{position:absolute;inset:4%;border-radius:50%;background:#fff}
+.emblem img{position:absolute;inset:18%;width:64%}
+.emblem svg{position:absolute;inset:0;width:100%;height:100%}
+.emblem .ring{fill:none;stroke:var(--gold);stroke-width:2.5;stroke-dasharray:1200;stroke-dashoffset:1200;transition:stroke-dashoffset 2.2s var(--ease)}
+.emblem.in .ring{stroke-dashoffset:0}
+
+/* ---------- leader ---------- */
+.leader{padding:var(--sec) 0;background:var(--mist)}
+.leader-grid{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:clamp(40px,6vw,96px);align-items:center}
+.portrait{position:relative;margin:0}
+.portrait .frame{border-radius:var(--r);overflow:hidden;aspect-ratio:9/10;background:#fff;box-shadow:0 40px 80px -48px rgba(11,31,58,.55)}
+.portrait img{width:100%;height:100%;object-fit:cover;object-position:50% 18%}
+.portrait::before{content:"";position:absolute;left:-14px;top:28px;bottom:28px;width:6px;border-radius:6px;background:linear-gradient(var(--green) 0 50%,var(--gold) 50%)}
+.leader .eyebrow{font-weight:700;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--green)}
+.leader h2.display{margin-top:14px}
+.leader .lead{color:var(--ink-2);margin:24px 0 0}
+.facts{margin:32px 0 0;display:grid;grid-template-columns:auto 1fr;gap:0;font-size:16px}
+.facts dt,.facts dd{padding:14px 0;border-top:1px solid var(--line);margin:0}
+.facts dt{font-weight:700;padding-right:24px;color:var(--ink-2);font-size:14px;text-transform:uppercase;letter-spacing:.06em;padding-top:16px}
+.facts dd{line-height:1.5}
+
+/* ---------- timeline ---------- */
+.tl{background:var(--navy);color:#fff;padding:var(--sec) 0;overflow:hidden}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:28px;flex-wrap:wrap}
+.sec-head p{margin:0;max-width:420px;font-size:17px;line-height:1.6;opacity:.85}
+.tl-rail{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin-top:56px;padding:4px 2px 10px;overscroll-behavior-x:contain}
+.tl-rail::-webkit-scrollbar{display:none}
+.tl-node{flex:0 0 auto;scroll-snap-align:start;background:none;border:0;color:#fff;text-align:left;padding:0 28px 0 0;min-width:140px;min-height:44px}
+.tl-node .yr{display:block;font-family:var(--display);font-weight:800;font-size:40px;letter-spacing:-.03em;opacity:.35;transition:opacity .3s,color .3s}
+.tl-node .dot{display:block;position:relative;height:28px}
+.tl-node .dot::before{content:"";position:absolute;left:0;right:-28px;top:13px;height:2px;background:rgba(255,255,255,.2)}
+.tl-node .dot::after{content:"";position:absolute;left:0;top:6px;width:16px;height:16px;border-radius:50%;background:var(--navy);border:3px solid rgba(255,255,255,.5);transition:all .3s}
+.tl-node .lbl{display:block;font-size:14px;font-weight:600;opacity:.6;max-width:140px;line-height:1.35}
+.tl-node[aria-selected="true"] .yr{opacity:1;color:var(--gold)}
+.tl-node[aria-selected="true"] .dot::after{background:var(--gold);border-color:var(--gold);transform:scale(1.2)}
+.tl-node[aria-selected="true"] .lbl{opacity:1}
+.tl-panel{margin-top:40px;display:grid;grid-template-columns:auto 1fr;gap:clamp(24px,5vw,72px);align-items:start;border-top:1px solid rgba(255,255,255,.14);padding-top:40px}
+.tl-big{font-family:var(--display);font-weight:800;font-size:clamp(88px,13vw,200px);letter-spacing:-.05em;line-height:.8;color:transparent;-webkit-text-stroke:2px var(--gold)}
+.tl-body h3{margin:0;font-family:var(--display);font-weight:700;font-size:clamp(28px,3vw,44px);letter-spacing:-.02em;line-height:1.08}
+.tl-body p{margin:16px 0 0;font-size:18px;line-height:1.65;color:#D3DCE8;max-width:640px}
+.tl-body .src{display:block;margin-top:16px;font-size:13px;color:#93A5BE}
+.tl-nav{display:flex;gap:10px;margin-top:26px;align-items:center}
+.round{width:48px;height:48px;border-radius:50%;border:2px solid rgba(255,255,255,.3);background:transparent;color:#fff;display:inline-flex;align-items:center;justify-content:center;transition:all .25s}
+.round:hover{background:#fff;color:var(--navy)}
+.round:disabled{opacity:.3;pointer-events:none}
+.tl-count{font-size:14px;color:#93A5BE;margin-left:8px;font-variant-numeric:tabular-nums}
+
+/* ---------- media ---------- */
+.media{padding:var(--sec) 0;background:#fff}
+.tools{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:40px}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.filters button{border:2px solid var(--line);background:#fff;font-weight:700;font-size:15px;padding:0 18px;min-height:44px;border-radius:999px}
+.filters button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.search{display:flex;align-items:center;gap:10px;border:2px solid var(--line);border-radius:999px;padding:0 18px;min-height:46px;min-width:260px}
+.search input{border:0;outline:0;font:inherit;font-size:16px;flex:1;background:transparent;min-width:0}
+.media-wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:clamp(24px,4vw,56px);margin-top:32px;align-items:start}
+.feat{background:var(--gold);color:var(--navy);border-radius:var(--r);padding:var(--pad);border:0;text-align:left;display:flex;flex-direction:column;min-height:360px;transition:transform .3s var(--ease)}
+.feat:hover{transform:translateY(-4px)}
+.feat .d{font-weight:700;font-size:14px;letter-spacing:.04em;text-transform:uppercase}
+.feat h3{margin:auto 0 0;padding-top:40px;font-family:var(--display);font-weight:800;font-size:clamp(28px,3vw,42px);letter-spacing:-.025em;line-height:1.05}
+.feat .more{margin-top:18px;font-weight:700;display:inline-flex;gap:8px;align-items:center}
+.feat.vid{background:var(--navy-3);color:#fff;padding:0;overflow:hidden;position:relative}
+.feat.vid img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.7}
+.feat.vid .tx{position:relative;margin-top:auto;padding:var(--pad);background:linear-gradient(0deg,rgba(6,20,42,.9),rgba(6,20,42,0))}
+.feat.vid .play{position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);width:76px;height:76px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center}
+.rows{list-style:none;margin:0;padding:0}
+.row{width:100%;display:grid;grid-template-columns:120px 1fr 28px;gap:18px;align-items:center;background:none;border:0;border-top:1px solid var(--line);padding:22px 4px;text-align:left;transition:background .25s}
+.rows li:last-child .row{border-bottom:1px solid var(--line)}
+.row:hover{background:var(--mist)}
+.row .d{font-size:14px;font-weight:600;color:var(--ink-2);line-height:1.4}
+.row .t{font-family:var(--display);font-weight:700;font-size:21px;letter-spacing:-.01em;line-height:1.2}
+.row .k{display:block;font-family:var(--body);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--green);margin-bottom:6px}
+.row .k.s{color:#8A6D10}
+.row .ar{font-size:20px;color:var(--ink-2)}
+.empty{padding:32px 4px;color:var(--ink-2);font-weight:600;border-top:1px solid var(--line)}
+
+/* ---------- themes ---------- */
+.themes{background:var(--green-dk);color:#fff;padding:var(--sec) 0;overflow:hidden}
+.th-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(24px,4vw,56px);margin-top:48px}
+.th-list{display:flex;flex-direction:column;gap:6px}
+.th-list button{display:flex;align-items:center;gap:16px;background:transparent;border:0;border-radius:18px;text-align:left;padding:16px 18px;min-height:64px;font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:-.015em;transition:background .25s;color:#fff}
+.th-list button:hover{background:rgba(255,255,255,.08)}
+.th-list button[aria-selected="true"]{background:rgba(255,255,255,.14);box-shadow:inset 4px 0 0 var(--gold)}
+.th-list svg{flex:none;opacity:.85}
+.th-panel{background:#fff;color:var(--ink);border-radius:var(--r);padding:var(--pad);display:flex;flex-direction:column;justify-content:space-between;min-height:400px}
+.th-panel .ic{width:76px;height:76px;border-radius:22px;background:var(--mist);display:flex;align-items:center;justify-content:center;color:var(--green)}
+.th-panel h3{margin:26px 0 0;font-family:var(--display);font-weight:800;font-size:clamp(32px,3.4vw,50px);letter-spacing:-.03em;line-height:1}
+.th-panel p{margin:16px 0 0;font-size:18px;line-height:1.6;color:var(--ink-2)}
+.status{display:inline-flex;align-items:center;gap:8px;margin-top:26px;font-size:14px;font-weight:600;color:var(--ink-2)}
+
+/* ---------- regions ---------- */
+.regions{padding:var(--sec) 0;background:var(--mist)}
+.rg-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,56px);margin-top:48px;align-items:start}
+.finder{display:flex;align-items:center;gap:10px;background:#fff;border:2px solid var(--line);border-radius:999px;padding:0 18px;min-height:50px;margin-bottom:16px}
+.finder input{border:0;outline:0;font:inherit;font-size:16px;flex:1;background:transparent;min-width:0}
+.finder-hint{font-size:14px;color:var(--ink-2);margin:-6px 0 14px 4px;min-height:20px}
+.tiles{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.tile{min-width:0;overflow-wrap:anywhere;hyphens:auto;-webkit-hyphens:auto;aspect-ratio:1.2;border:0;border-radius:14px;background:#fff;color:var(--ink);font-weight:700;font-size:14px;line-height:1.15;padding:10px;display:flex;align-items:flex-end;text-align:left;transition:background .2s,color .2s,box-shadow .2s;box-shadow:inset 0 0 0 1px var(--line)}
+.tile:hover{box-shadow:inset 0 0 0 2px var(--green)}
+.tile[aria-pressed="true"]{background:var(--green);color:#fff;box-shadow:none}
+.tile.hit{box-shadow:inset 0 0 0 3px var(--gold)}
+.tile.void{background:transparent;box-shadow:none;pointer-events:none}
+.compass{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-2);margin-top:10px}
+.dias-h{margin:28px 0 10px;font-weight:700;font-size:15px}
+.dias{display:flex;flex-wrap:wrap;gap:8px}
+.dias button{border:2px solid var(--line);background:#fff;border-radius:999px;padding:0 16px;min-height:44px;font-weight:700;font-size:14px}
+.dias button[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+.rg-card{background:#fff;border-radius:var(--r);padding:var(--pad);position:sticky;top:100px;box-shadow:0 30px 60px -48px rgba(11,31,58,.5)}
+.rg-card .kind{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
+.rg-card h3{margin:6px 0 0;font-family:var(--display);font-weight:800;font-size:clamp(34px,3.6vw,52px);letter-spacing:-.03em;line-height:1}
+.rtabs{display:flex;gap:4px;margin-top:22px;background:var(--mist);border-radius:999px;padding:4px}
+.rtabs button{flex:1;border:0;background:none;border-radius:999px;min-height:40px;font-weight:700;font-size:14px}
+.rtabs button[aria-selected="true"]{background:#fff;box-shadow:0 2px 8px -4px rgba(11,31,58,.4)}
+.rpane{margin-top:20px}
+.deps{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.deps span{background:var(--mist);border-radius:10px;padding:8px 12px;font-weight:600;font-size:15px}
+.deps span.hit{background:#FFF1C2}
+.rnote{font-size:14px;line-height:1.55;color:var(--ink-2);margin:14px 0 0}
+.dir{display:flex;flex-direction:column;gap:8px}
+.dir div{display:flex;justify-content:space-between;align-items:center;gap:12px;border:1.5px dashed var(--line);border-radius:14px;padding:14px 16px;font-size:15px}
+.dir div span:last-child{font-size:13px;color:var(--ink-2);text-align:right}
+.demo-flag{display:inline-block;background:#FFF1C2;color:#6B5200;font-size:12px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;border-radius:999px;padding:5px 10px}
+.rg-cta{margin-top:22px}
+
+/* ---------- join ---------- */
+.join{padding:var(--sec) 0;color:#fff;overflow:hidden;background:var(--navy-3)}
+.join .bg{position:absolute;inset:0}
+.join .bg img{width:100%;height:100%;object-fit:cover;object-position:60% 30%;opacity:.32}
+.join .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--navy-3) 30%,rgba(6,20,42,.5))}
+.join-grid{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,64px);align-items:center}
+.join .lead{color:#D3DCE8;margin:22px 0 0;max-width:500px}
+.form{background:#fff;color:var(--ink);border-radius:var(--r);padding:var(--pad);box-shadow:0 40px 80px -40px rgba(0,0,0,.7)}
+.steps{display:flex;gap:8px;margin-bottom:22px}
+.steps span{flex:1;height:6px;border-radius:6px;background:#E1E8F0;transition:background .3s}
+.steps span.on{background:var(--green)}
+.form h3{margin:0;font-family:var(--display);font-weight:800;font-size:28px;letter-spacing:-.02em}
+.field{display:flex;flex-direction:column;gap:8px;margin-top:18px;font-weight:700;font-size:15px}
+.field input,.field select{font:inherit;font-weight:500;font-size:16px;padding:13px 16px;border:2px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);width:100%}
+.field input:focus,.field select:focus{border-color:var(--green);outline:0}
+.field [aria-invalid="true"]{border-color:#B42318}
+.err{color:#B42318;font-size:14px;font-weight:600;min-height:20px;margin-top:6px}
+.check{display:flex;gap:12px;align-items:flex-start;margin-top:18px;font-size:15px;line-height:1.5}
+.check input{width:22px;height:22px;margin-top:2px;accent-color:var(--green);flex:none}
+.form-btns{display:flex;justify-content:space-between;gap:12px;margin-top:22px}
+.btn2{background:var(--mist);border:0;color:var(--ink);font-weight:700;padding:0 22px;min-height:48px;border-radius:999px}
+.recap{margin-top:16px;background:var(--mist);border-radius:16px;padding:16px 18px;font-size:15px;line-height:1.7}
+.done{text-align:center;padding:10px 0}
+.done .ok{width:72px;height:72px;margin:0 auto;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center}
+.done p{color:var(--ink-2);line-height:1.6}
+
+/* ---------- admin preview ---------- */
+.adm{padding:var(--sec) 0;background:#fff}
+.adm .lead{color:var(--ink-2);max-width:560px;margin:20px 0 0}
+.wf{display:grid;grid-template-columns:300px 1fr;gap:clamp(20px,3vw,40px);margin-top:44px;align-items:start}
+.wf-tabs{display:flex;flex-direction:column;gap:6px}
+.wf-tabs button{display:flex;gap:14px;align-items:center;text-align:left;background:none;border:2px solid transparent;border-radius:16px;padding:14px 16px;font-weight:700;font-size:16px;min-height:56px}
+.wf-tabs button i{flex:none;width:32px;height:32px;border-radius:10px;background:var(--mist);display:inline-flex;align-items:center;justify-content:center;font-style:normal;font-size:14px;color:var(--green)}
+.wf-tabs button[aria-selected="true"]{border-color:var(--ink);background:var(--mist)}
+.wf-tabs button[aria-selected="true"] i{background:var(--green);color:#fff}
+.shot{background:#E8EDF3;border-radius:var(--r);padding:12px;min-width:0}
+.shot-bar{display:flex;gap:6px;padding:4px 6px 12px;align-items:center}
+.shot-bar i{width:10px;height:10px;border-radius:50%;background:#C5CFDB}
+.shot-bar span{margin-left:10px;font-size:12px;color:var(--ink-2);background:#fff;border-radius:999px;padding:4px 12px}
+.shot-in{background:#fff;border-radius:18px;padding:22px;min-height:330px}
+.shot-in h4{margin:0 0 4px;font-family:var(--display);font-size:22px}
+.shot-in .sub{font-size:14px;color:var(--ink-2);margin:0 0 16px}
+.mock-f{display:flex;flex-direction:column;gap:10px}
+.mock-f div{border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px}
+.mock-f label{font-size:12px;font-weight:700;color:var(--ink-2);display:block;margin-bottom:4px;text-transform:uppercase;letter-spacing:.05em}
+.mrow{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #EEF1F5;font-size:14px}
+.mrow:last-child{border:0}
+.pill{border-radius:999px;padding:3px 10px;font-size:12px;font-weight:700;white-space:nowrap}
+.p-wait{background:#FFF4D6;color:#7A5B00}.p-ok{background:#DDF3E6;color:#00612E}.p-rev{background:#E6EEF8;color:#1E3A66}.p-no{background:#FDE8E6;color:#B42318}
+.mlang{display:flex;gap:6px;margin-bottom:12px}.mlang span{border:1.5px solid var(--line);border-radius:999px;padding:4px 12px;font-size:13px;font-weight:700}.mlang span.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.shot-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px;padding:0 6px 4px}
+.shot-foot small{color:var(--ink-2);font-size:13px}
+
+/* ---------- footer ---------- */
+.foot{background:var(--navy-3);color:#AFBCCD;padding:64px 0 calc(40px + var(--sab))}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:start}
+.foot nav{display:flex;flex-wrap:wrap;gap:6px 22px}
+.foot nav a{color:#fff;text-decoration:none;font-weight:600;padding:8px 0}
+.foot nav a:hover{text-decoration:underline}
+.foot-b{margin-top:44px;padding-top:22px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;line-height:1.6}
+.foot-b a{color:#D6DEE8}
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:70;background:rgba(6,20,42,.72);display:none;align-items:center;justify-content:center;padding:calc(16px + var(--sat)) 16px calc(16px + var(--sab))}
+.modal.open{display:flex}
+.modal-box{background:#fff;border-radius:24px;max-width:640px;width:100%;max-height:100%;overflow:auto;padding:var(--pad)}
+.modal-box .k{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--green)}
+.modal-box h3{margin:10px 0 0;font-family:var(--display);font-weight:800;font-size:clamp(26px,3vw,34px);letter-spacing:-.02em;line-height:1.08}
+.modal-box p{font-size:17px;line-height:1.65;color:var(--ink-2)}
+.modal-btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.rv.in{opacity:1;transform:none}
+
+/* ---------- tablet ---------- */
+@media (max-width:1080px){
+  .nav,.hdr .seg{display:none}
+  .icon-btn,.lang-m{display:inline-flex}
+  .move-grid,.leader-grid,.th-grid,.rg-grid,.join-grid,.media-wrap,.foot-grid{grid-template-columns:1fr}
+  .wf{grid-template-columns:1fr}
+  .wf-tabs{flex-direction:row;overflow-x:auto;scrollbar-width:none;margin-inline:-24px;padding:0 24px}
+  .wf-tabs button{flex:none}
+  .rg-card{position:static}
+  .leader-grid{gap:44px}
+  .portrait{max-width:560px}
+}
+/* ---------- phone ---------- */
+@media (max-width:720px){
+  :root{--r:22px;--h2:clamp(36px,10.5vw,52px)}
+  html{scroll-padding-top:68px}
+  .wrap{width:calc(100% - 40px - var(--sal) - var(--sar))}
+  .hdr-in{height:64px;gap:8px}
+  .hdr .logo img{height:38px}
+  .hdr .cta{min-height:40px;padding:0 16px;font-size:14px}
+  .hero{min-height:640px}
+  .slide{width:100%;height:62%;top:0;bottom:auto;-webkit-mask-image:linear-gradient(0deg,transparent 0,#000 34%);mask-image:linear-gradient(0deg,transparent 0,#000 34%);-webkit-mask-composite:source-over;mask-composite:add}
+  .s-a img{object-position:50% 12%}.s-b img{object-position:50% 14%}
+  .hero-copy{bottom:calc(28px + var(--sab))}
+  .hero-copy .in{max-width:none}
+  .kicker{font-size:11.5px;letter-spacing:.1em}
+  .lang-m>button{background:rgba(6,20,42,.45);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+  .hero h1{font-size:clamp(46px,13.4vw,64px);margin-top:14px;line-height:.98}
+  .hero-sub{font-size:16px;margin-top:16px;line-height:1.55}
+  .hero-btns{margin-top:22px}
+  .hero-btns .cta{flex:1}
+  .hero-btns .ghost{display:none}
+  .hero-ctrl{top:calc(64px + var(--sat) + 8px);bottom:auto;right:calc(12px + var(--sar))}
+  .hero-ctrl .dot{width:34px}
+  .hero-ctrl .dot i{width:22px}
+  .move-grid{gap:44px}
+  .stats{grid-template-columns:1fr}
+  .stat,.stat+.stat{display:flex;align-items:baseline;gap:16px;padding:16px 0;border-left:0;border-bottom:1px solid rgba(255,255,255,.18)}
+  .stat b{min-width:118px}
+  .emblem{max-width:240px}
+  .portrait::before{left:-8px}
+  .portrait .frame{aspect-ratio:4/5}
+  .facts{grid-template-columns:1fr}
+  .facts dt{padding-bottom:0;border-top:1px solid var(--line)}
+  .facts dd{border-top:0;padding-top:4px}
+  .tl-rail{margin-top:36px;margin-inline:-20px;padding-inline:20px}
+  .tl-node{min-width:112px;padding-right:18px}
+  .tl-node .yr{font-size:30px}
+  .tl-panel{grid-template-columns:1fr;gap:12px;padding-top:28px;margin-top:28px}
+  .tl-big{font-size:84px}
+  .tl-body p{font-size:17px}
+  .tools{display:grid;grid-template-columns:minmax(0,1fr)}
+  .search{min-width:0}
+  .filters{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:-20px;padding:0 20px 4px}
+  .filters::-webkit-scrollbar{display:none}
+  .filters button{flex:none}
+  .feat{min-height:280px}
+  .row{grid-template-columns:1fr 20px;gap:6px 12px;padding:18px 2px}
+  .row .d{grid-column:1;grid-row:1;font-size:13px}
+  .row .t{grid-column:1;grid-row:2;font-size:19px}
+  .row .ar{grid-column:2;grid-row:1/3}
+  .th-list{flex-direction:row;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-20px;padding:0 20px 6px;scrollbar-width:none}
+  .th-list::-webkit-scrollbar{display:none}
+  .th-list button{flex:none;scroll-snap-align:start;font-size:17px;min-height:54px;background:rgba(255,255,255,.06)}
+  .th-list button[aria-selected="true"]{box-shadow:inset 0 -3px 0 var(--gold)}
+  .th-panel{min-height:0}
+  .tiles{gap:4px}.tile{font-size:clamp(8.5px,2.55vw,11px);border-radius:9px;padding:4px;aspect-ratio:.95;letter-spacing:-.01em}
+  .join .bg::after{background:linear-gradient(180deg,rgba(6,20,42,.6),var(--navy-3) 55%)}
+  .wf-tabs{margin-inline:-20px;padding:0 20px}
+  .shot{padding:8px}.shot-in{padding:16px;min-height:0}
+  .foot-b{flex-direction:column}
+}
+@media (max-width:360px){.hero h1{font-size:42px}.hdr .cta{padding:0 12px}}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .rv{opacity:1;transform:none}
+  .hero h1 span b,.hero-sub,.hero-btns{transform:none;opacity:1}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">Aller au contenu</a>
+
+<header class="hdr" id="hdr">
+  <div class="wrap hdr-in">
+    <a class="logo" href="#top" aria-label="Nouvelle Responsabilité — accueil"><picture><source media="(max-width:420px)" srcset="img/nr-symbol-rev.svg"><img src="img/nr-reversed.svg" alt="Nouvelle Responsabilité" width="184" height="52"></picture></a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="#parti" data-i18n="nav.party">Le parti</a>
+      <a href="#amadou-ba" data-i18n="nav.leader">Amadou Bâ</a>
+      <a href="#parcours" data-i18n="nav.career">Parcours</a>
+      <a href="#actualites" data-i18n="nav.news">Actualités</a>
+      <a href="#themes" data-i18n="nav.themes">Thèmes</a>
+      <a href="#territoires" data-i18n="nav.regions">Territoires</a>
+    </nav>
+    <div class="hdr-r">
+      <div class="seg" role="group" aria-label="Langue">
+        <button type="button" data-lang="fr" aria-pressed="true">FR</button>
+        <button type="button" data-lang="wo" aria-pressed="false">WO</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <div class="lang-m">
+        <button type="button" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-controls="langPop"><span id="langCur">FR</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg><span class="sr" data-i18n="lang">Langue</span></button>
+        <div class="lang-pop" id="langPop">
+          <button type="button" data-lang="fr" aria-pressed="true">Français</button>
+          <button type="button" data-lang="wo" aria-pressed="false">Wolof</button>
+          <button type="button" data-lang="en" aria-pressed="false">English</button>
+        </div>
+      </div>
+      <a class="cta" href="#adherer" data-i18n="cta.join">Adhérer</a>
+      <button class="icon-btn" type="button" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="drawer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+  <div class="drawer-top">
+    <img src="img/nr-reversed.svg" alt="" width="108" height="40">
+    <button class="icon-btn" type="button" id="closeDrawer" style="display:inline-flex" aria-label="Fermer le menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <nav aria-label="Menu">
+    <a href="#parti" data-i18n="nav.party">Le parti</a>
+    <a href="#amadou-ba" data-i18n="nav.leader">Amadou Bâ</a>
+    <a href="#parcours" data-i18n="nav.career">Parcours</a>
+    <a href="#actualites" data-i18n="nav.news">Actualités</a>
+    <a href="#themes" data-i18n="nav.themes">Thèmes</a>
+    <a href="#territoires" data-i18n="nav.regions">Territoires</a>
+  </nav>
+  <div class="foot-d">
+    <div class="seg" role="group" aria-label="Langue">
+      <button type="button" data-lang="fr" aria-pressed="true">FR</button>
+      <button type="button" data-lang="wo" aria-pressed="false">WO</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <a class="cta gold" href="#adherer" data-i18n="cta.join2">Rejoindre le mouvement</a>
+  </div>
+</div>
+
+<main id="main">
+<span id="top"></span>
+<!-- HERO -->
+<section class="hero" id="hero" aria-label="Introduction" aria-roledescription="carrousel">
+  <div class="slide s-a on" aria-hidden="false">
+    <picture>
+      <source media="(max-width:720px)" srcset="img/hero-a-m.webp" width="720" height="960">
+      <img src="img/hero-a.webp" width="1280" height="960" alt="Amadou Bâ, assis dans un fauteuil, en costume sombre" fetchpriority="high" decoding="async">
+    </picture>
+  </div>
+  <div class="slide s-b" aria-hidden="true">
+    <picture>
+      <source media="(max-width:720px)" srcset="img/hero-b-m.webp" width="502" height="628">
+      <img src="img/hero-b.webp" width="1106" height="628" alt="Amadou Bâ en costume, devant un drapeau" loading="lazy" decoding="async">
+    </picture>
+  </div>
+  <div class="hero-copy">
+    <div class="wrap"><div class="in">
+      <span class="kicker"><i></i><span data-i18n="hero.kicker">Nouvelle Responsabilité · Amadou Bâ</span></span>
+      <h1 class="display"><span><b>Paix.</b></span><span><b>Compétence.</b></span><span><b>Prospérité.</b></span></h1>
+      <p class="hero-sub" data-i18n="hero.sub">Le parti présidé par Amadou Bâ, ancien Premier ministre du Sénégal, aujourd'hui député à l'Assemblée nationale.</p>
+      <div class="hero-btns">
+        <a class="cta gold" href="#adherer"><span data-i18n="cta.join2">Rejoindre le mouvement</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="cta ghost" href="#amadou-ba" data-i18n="cta.leader">Découvrir Amadou Bâ</a>
+      </div>
+    </div></div>
+  </div>
+  <div class="hero-ctrl">
+    <button type="button" class="dot" data-i="0" aria-current="true" aria-label="Photo 1 sur 2"><i></i></button>
+    <button type="button" class="dot" data-i="1" aria-current="false" aria-label="Photo 2 sur 2"><i></i></button>
+    <button type="button" class="pp" id="pp" aria-label="Mettre le diaporama en pause"><svg id="ppI" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></button>
+  </div>
+</section>
+
+<!-- PARTY -->
+<section class="move" id="parti" aria-labelledby="h-party">
+  <div class="marquee" aria-hidden="true"><div>Paix <em>•</em> Compétence <em>•</em> Prospérité <em>•</em> Nouvelle Responsabilité <em>•</em></div><div>Paix <em>•</em> Compétence <em>•</em> Prospérité <em>•</em> Nouvelle Responsabilité <em>•</em></div><div>Paix <em>•</em> Compétence <em>•</em> Prospérité <em>•</em> Nouvelle Responsabilité <em>•</em></div></div>
+  <div class="wrap move-grid">
+    <div class="rv">
+      <h2 class="display" id="h-party" data-i18n="party.h">Une opposition démocratique et républicaine.</h2>
+      <p class="lead" data-i18n="party.lead">Lancée à Dakar le 9 septembre 2024, Nouvelle Responsabilité rassemble autour d'Amadou Bâ celles et ceux qui veulent servir le Sénégal par le dialogue, la compétence et le respect des institutions.</p>
+      <div class="stats">
+        <div class="stat"><b data-count="2024">2024</b><span data-i18n="party.s1">Lancement du parti à Dakar</span></div>
+        <div class="stat"><b><span data-count="35.79" data-dec="2">35,79</span> %</b><span data-i18n="party.s2">Score d'Amadou Bâ à la présidentielle de 2024</span></div>
+        <div class="stat"><b data-count="7">7</b><span data-i18n="party.s3">Députés de la coalition Jàmm ak Njariñ, 2024</span></div>
+      </div>
+    </div>
+    <div class="emblem rv" id="emblem">
+      <div class="disc"></div>
+      <svg viewBox="0 0 400 400" aria-hidden="true"><circle class="ring" cx="200" cy="200" r="190"/></svg>
+      <img src="img/nr-symbol.svg" alt="" width="256" height="256">
+    </div>
+  </div>
+</section>
+
+<!-- LEADER -->
+<section class="leader" id="amadou-ba" aria-labelledby="h-leader">
+  <div class="wrap leader-grid">
+    <figure class="portrait rv">
+      <div class="frame">
+        <picture><source media="(max-width:720px)" srcset="img/bio-portrait-sm.webp"><img src="img/bio-portrait.webp" width="1152" height="1280" alt="Portrait d'Amadou Bâ, en costume sombre et lunettes" loading="lazy" decoding="async"></picture>
+      </div>
+    </figure>
+    <div class="rv">
+      <span class="eyebrow" data-i18n="leader.kicker">Président du parti</span>
+      <h2 class="display" id="h-leader">Amadou Bâ</h2>
+      <p class="lead" data-i18n="leader.bio">Inspecteur des impôts de formation, il a dirigé l'administration fiscale avant d'être ministre de l'Économie et des Finances, puis des Affaires étrangères, et Premier ministre de 2022 à 2024. Deuxième de l'élection présidentielle de 2024, il siège depuis à l'Assemblée nationale.</p>
+      <dl class="facts">
+        <dt data-i18n="f.born">Naissance</dt><dd data-i18n="f.bornV">17 mai 1961, Dakar</dd>
+        <dt data-i18n="f.edu">Formation</dt><dd data-i18n="f.eduV">Université Cheikh Anta Diop · ENAM</dd>
+        <dt data-i18n="f.roles">Fonctions</dt><dd data-i18n="f.rolesV">Premier ministre (2022–2024) · Ministre des Affaires étrangères (2019–2020) · Ministre de l'Économie et des Finances (2013–2019)</dd>
+        <dt data-i18n="f.now">Aujourd'hui</dt><dd data-i18n="f.nowV">Député, président de Nouvelle Responsabilité</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="tl" id="parcours" aria-labelledby="h-tl">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <h2 class="display" id="h-tl" data-i18n="tl.h">Une vie au service de l'État</h2>
+      <p data-i18n="tl.p">Faites défiler les années ou utilisez les flèches.</p>
+    </div>
+    <div class="tl-rail rv" id="tlRail" role="tablist" aria-label="Chronologie"></div>
+    <div class="tl-panel" id="tlPanel" role="tabpanel" aria-live="polite">
+      <div class="tl-big" id="tlYr" aria-hidden="true"></div>
+      <div class="tl-body">
+        <h3 id="tlT"></h3>
+        <p id="tlD"></p>
+        <span class="src" id="tlS"></span>
+        <div class="tl-nav">
+          <button class="round" type="button" id="tlPrev" aria-label="Étape précédente"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+          <button class="round" type="button" id="tlNext" aria-label="Étape suivante"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <span class="tl-count" id="tlC"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEDIA -->
+<section class="media" id="actualites" aria-labelledby="h-media">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <h2 class="display" id="h-media" data-i18n="media.h">Prises de parole</h2>
+      <p data-i18n="media.p">Discours, déclarations et communiqués, datés et reliés à leur source.</p>
+    </div>
+    <div class="tools rv">
+      <div class="filters" role="group" aria-label="Filtrer" id="filters">
+        <button type="button" data-f="all" aria-pressed="true" data-i18n="f.all">Tout</button>
+        <button type="button" data-f="speech" aria-pressed="false" data-i18n="f.speech">Discours</button>
+        <button type="button" data-f="statement" aria-pressed="false" data-i18n="f.statement">Déclarations</button>
+        <button type="button" data-f="release" aria-pressed="false" data-i18n="f.release">Communiqués</button>
+        <button type="button" data-f="video" aria-pressed="false" data-i18n="f.video">Vidéos</button>
+      </div>
+      <label class="search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><span class="sr" data-i18n="search">Rechercher</span><input type="search" id="q" placeholder="Rechercher…" data-i18n-ph="search.ph" autocomplete="off"></label>
+    </div>
+    <div class="media-wrap" id="mediaWrap" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- THEMES -->
+<section class="themes" id="themes" aria-labelledby="h-th">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <h2 class="display" id="h-th" data-i18n="th.h">Les thèmes portés au débat</h2>
+      <p data-i18n="th.p">Six thèmes que Nouvelle Responsabilité a demandé d'inscrire au dialogue national de 2025.</p>
+    </div>
+    <div class="th-grid rv">
+      <div class="th-list" role="tablist" aria-label="Thèmes" id="thList"></div>
+      <div class="th-panel" role="tabpanel" id="thPanel" aria-live="polite">
+        <div><div class="ic" id="thIc"></div><h3 id="thT"></h3><p id="thD"></p></div>
+        <span class="status"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg><span data-i18n="th.status">Communiqué du 18 mai 2025</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REGIONS -->
+<section class="regions" id="territoires" aria-labelledby="h-rg">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <h2 class="display" id="h-rg" data-i18n="rg.h">Partout au Sénégal et dans la diaspora</h2>
+      <p data-i18n="rg.p">Choisissez une région, ou cherchez votre département.</p>
+    </div>
+    <div class="rg-grid">
+      <div class="rv">
+        <label class="finder"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><span class="sr" data-i18n="rg.find">Trouver un département</span><input type="search" id="rgq" placeholder="Ex. : Mbour, Podor, Bignona…" autocomplete="off"></label>
+        <p class="finder-hint" id="rgHint" aria-live="polite"></p>
+        <div class="tiles" id="tiles" role="group" aria-label="Régions du Sénégal"></div>
+        <div class="compass" aria-hidden="true"><span data-i18n="rg.west">← Ouest · Atlantique</span><span data-i18n="rg.east">Est →</span></div>
+        <p class="dias-h" data-i18n="rg.dias">Diaspora</p>
+        <div class="dias" id="dias" role="group" aria-label="Diaspora"></div>
+      </div>
+      <div class="rg-card rv" id="rgCard" aria-live="polite">
+        <span class="kind" id="rgKind"></span>
+        <h3 id="rgName"></h3>
+        <div class="rtabs" role="tablist" aria-label="Fiche">
+          <button type="button" role="tab" id="rt1" aria-selected="true" aria-controls="rp1" data-i18n="rg.t1">Territoire</button>
+          <button type="button" role="tab" id="rt2" aria-selected="false" aria-controls="rp2" data-i18n="rg.t2">Annuaire</button>
+        </div>
+        <div class="rpane" id="rp1" role="tabpanel" aria-labelledby="rt1"></div>
+        <div class="rpane" id="rp2" role="tabpanel" aria-labelledby="rt2" hidden>
+          <span class="demo-flag" data-i18n="rg.demo">Démonstration de l'annuaire</span>
+          <div class="dir" style="margin-top:14px">
+            <div><span data-i18n="rg.r1">Responsables désignés</span><span data-i18n="rg.none">Publié par le parti</span></div>
+            <div><span data-i18n="rg.r2">Permanence</span><span data-i18n="rg.none">Publié par le parti</span></div>
+            <div><span data-i18n="rg.r3">Rencontres à venir</span><span data-i18n="rg.none">Publié par le parti</span></div>
+            <div><span data-i18n="rg.r4">Contact officiel</span><span data-i18n="rg.none">Publié par le parti</span></div>
+          </div>
+          <p class="rnote" data-i18n="rg.dirNote">Ces rubriques sont vides dans la démonstration : elles seront remplies par l'équipe du parti depuis l'espace d'administration.</p>
+        </div>
+        <a class="cta rg-cta" href="#adherer" id="rgJoin"></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOIN -->
+<section class="join" id="adherer" aria-labelledby="h-join">
+  <div class="bg" aria-hidden="true"><img src="img/celebration.webp" alt="" loading="lazy" decoding="async"></div>
+  <div class="wrap join-grid">
+    <div class="rv">
+      <h2 class="display" id="h-join" data-i18n="join.h">Prenez votre part de responsabilité.</h2>
+      <p class="lead" data-i18n="join.lead">Une demande d'adhésion en trois étapes, examinée par le parti avant toute carte de membre.</p>
+    </div>
+    <form class="form rv" id="joinForm" novalidate>
+      <div class="steps" aria-hidden="true"><span class="on"></span><span></span><span></span></div>
+      <div data-step="1">
+        <h3 data-i18n="join.s1">Vos coordonnées</h3>
+        <label class="field"><span data-i18n="join.name">Nom complet</span><input name="name" autocomplete="name" aria-describedby="e-name"></label>
+        <div class="err" id="e-name"></div>
+        <label class="field"><span data-i18n="join.contact">Téléphone ou e-mail</span><input name="contact" autocomplete="tel" inputmode="email" aria-describedby="e-contact"></label>
+        <div class="err" id="e-contact"></div>
+      </div>
+      <div data-step="2" hidden>
+        <h3 data-i18n="join.s2">Où êtes-vous ?</h3>
+        <label class="field"><span data-i18n="join.where">Région, ou pays pour la diaspora</span><select name="where" id="whereSel" aria-describedby="e-where"></select></label>
+        <div class="err" id="e-where"></div>
+      </div>
+      <div data-step="3" hidden>
+        <h3 data-i18n="join.s3">Vérification</h3>
+        <div class="recap" id="recap"></div>
+        <label class="check"><input type="checkbox" name="consent" aria-describedby="e-consent"><span data-i18n="join.consent">J'accepte que ces informations soient utilisées uniquement pour traiter ma demande d'adhésion.</span></label>
+        <div class="err" id="e-consent"></div>
+      </div>
+      <div data-step="4" hidden class="done">
+        <div class="ok"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></div>
+        <h3 style="margin-top:16px" data-i18n="join.done">Démonstration terminée</h3>
+        <p data-i18n="join.doneP">Rien n'a été envoyé au parti : la demande est conservée uniquement dans ce navigateur, pour apparaître dans la démo d'administration.</p>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><a class="cta" href="admin.html#adhesions" data-i18n="join.toAdmin">Voir dans l'administration</a><button type="button" class="btn2" id="restart" data-i18n="join.again">Recommencer</button></div>
+      </div>
+      <div class="form-btns" id="formBtns">
+        <button type="button" class="btn2" id="back" data-i18n="join.back" hidden>Retour</button>
+        <button type="submit" class="cta" id="next" style="margin-left:auto" data-i18n="join.next">Continuer</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ADMIN PREVIEW -->
+<section class="adm" id="plateforme" aria-labelledby="h-adm">
+  <div class="wrap">
+    <div class="rv">
+      <h2 class="display" id="h-adm" data-i18n="adm.h">La plateforme derrière le site</h2>
+      <p class="lead" data-i18n="adm.lead">Cinq parcours de l'équipe, utilisables dès maintenant dans la démonstration avec des données fictives.</p>
+    </div>
+    <div class="wf rv">
+      <div class="wf-tabs" role="tablist" aria-label="Parcours" id="wfTabs"></div>
+      <div class="shot">
+        <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><span id="wfUrl">admin · actualités</span></div>
+        <div class="shot-in" id="wfPanel" role="tabpanel"></div>
+        <div class="shot-foot"><small data-i18n="adm.sample">Données fictives · rien n'est publié ni envoyé</small><a class="cta dark sm" id="wfGo" href="admin.html"><span data-i18n="adm.open">Essayer ce parcours</span> →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <img src="img/nr-reversed.svg" alt="Nouvelle Responsabilité" width="160" height="60" style="height:60px;width:auto">
+        <p style="margin:16px 0 0;line-height:1.6;max-width:380px" data-i18n="foot.about">Parti politique sénégalais présidé par Amadou Bâ, lancé à Dakar le 9 septembre 2024.</p>
+      </div>
+      <nav aria-label="Pied de page">
+        <a href="#parti" data-i18n="nav.party">Le parti</a><a href="#amadou-ba" data-i18n="nav.leader">Amadou Bâ</a><a href="#parcours" data-i18n="nav.career">Parcours</a><a href="#actualites" data-i18n="nav.news">Actualités</a><a href="#territoires" data-i18n="nav.regions">Territoires</a><a href="#adherer" data-i18n="cta.join">Adhérer</a><a href="admin.html" data-i18n="foot.admin">Administration</a>
+      </nav>
+    </div>
+    <div class="foot-b">
+      <span data-i18n="foot.proto">Démonstration indépendante — ce n'est pas le site officiel de Nouvelle Responsabilité.</span>
+      <span><span data-i18n="foot.by">Conception</span> : <a href="https://dalaltechnologies.com" target="_blank" rel="noopener">Dalal Technologies</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mT" hidden>
+  <div class="modal-box">
+    <div class="k" id="mK"></div>
+    <h3 id="mT"></h3>
+    <p id="mD"></p>
+    <div class="modal-btns"><a class="cta" id="mSrc" target="_blank" rel="noopener" href="#"></a><button type="button" class="btn2" id="mClose" data-i18n="close">Fermer</button></div>
+  </div>
+</div>
+
+<script>
+(function(){
+'use strict';
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+const store={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------------- i18n ---------------- */
+const T={
+fr:{skip:'Aller au contenu',lang:'Langue','nav.party':'Le parti','nav.leader':'Amadou Bâ','nav.career':'Parcours','nav.news':'Actualités','nav.themes':'Thèmes','nav.regions':'Territoires','cta.join':'Adhérer','cta.join2':'Rejoindre le mouvement','cta.leader':'Découvrir Amadou Bâ',
+'hero.kicker':'Nouvelle Responsabilité · Amadou Bâ','hero.sub':"Le parti présidé par Amadou Bâ, ancien Premier ministre du Sénégal, aujourd'hui député à l'Assemblée nationale.",
+'party.h':'Une opposition démocratique et républicaine.','party.lead':"Lancée à Dakar le 9 septembre 2024, Nouvelle Responsabilité rassemble autour d'Amadou Bâ celles et ceux qui veulent servir le Sénégal par le dialogue, la compétence et le respect des institutions.",'party.s1':'Lancement du parti à Dakar','party.s2':"Score d'Amadou Bâ à la présidentielle de 2024",'party.s3':'Députés de la coalition Jàmm ak Njariñ, 2024',
+'leader.kicker':'Président du parti','leader.bio':"Inspecteur des impôts de formation, il a dirigé l'administration fiscale avant d'être ministre de l'Économie et des Finances, puis des Affaires étrangères, et Premier ministre de 2022 à 2024. Deuxième de l'élection présidentielle de 2024, il siège depuis à l'Assemblée nationale.",
+'f.born':'Naissance','f.bornV':'17 mai 1961, Dakar','f.edu':'Formation','f.eduV':'Université Cheikh Anta Diop · ENAM','f.roles':'Fonctions','f.rolesV':"Premier ministre (2022–2024) · Ministre des Affaires étrangères (2019–2020) · Ministre de l'Économie et des Finances (2013–2019)",'f.now':"Aujourd'hui",'f.nowV':'Député, président de Nouvelle Responsabilité',
+'tl.h':"Une vie au service de l'État",'tl.p':'Faites défiler les années ou utilisez les flèches.','prev':'Étape précédente','next':'Étape suivante',
+'media.h':'Prises de parole','media.p':'Discours, déclarations et communiqués, datés et reliés à leur source.','f.all':'Tout','f.speech':'Discours','f.statement':'Déclarations','f.release':'Communiqués','f.video':'Vidéos','search':'Rechercher','search.ph':'Rechercher…','empty':'Aucun résultat pour cette recherche.','sample':'Exemple de format','source':'Source','read':'Lire','readSrc':'Lire la source','close':'Fermer',
+'th.h':'Les thèmes portés au débat','th.p':"Six thèmes que Nouvelle Responsabilité a demandé d'inscrire au dialogue national de 2025.",'th.status':'Communiqué du 18 mai 2025',
+'rg.h':'Partout au Sénégal et dans la diaspora','rg.p':'Choisissez une région, ou cherchez votre département.','rg.find':'Trouver un département','rg.west':'← Ouest · Atlantique','rg.east':'Est →','rg.dias':'Diaspora','rg.t1':'Territoire','rg.t2':'Annuaire','rg.region':'Région','rg.deps':'Départements','rg.n':'départements','rg.demo':"Démonstration de l'annuaire",'rg.r1':'Responsables désignés','rg.r2':'Permanence','rg.r3':'Rencontres à venir','rg.r4':'Contact officiel','rg.none':'Publié par le parti','rg.dirNote':"Ces rubriques sont vides dans la démonstration : elles seront remplies par l'équipe du parti depuis l'espace d'administration.",'rg.joinFrom':'Adhérer depuis','rg.found':'trouvé dans la région de','rg.nf':'Aucun département trouvé.','rg.diasK':'Diaspora','rg.diasT':"Les Sénégalais de l'extérieur pourront consulter ici les informations publiées par le parti pour leur pays de résidence.",'rg.diasEx':'Liste de pays donnée à titre d\'exemple.','rg.hintDef':'Les 14 régions et leurs 46 départements.',
+'join.h':'Prenez votre part de responsabilité.','join.lead':"Une demande d'adhésion en trois étapes, examinée par le parti avant toute carte de membre.",'join.s1':'Vos coordonnées','join.s2':'Où êtes-vous ?','join.s3':'Vérification','join.name':'Nom complet','join.contact':'Téléphone ou e-mail','join.where':'Région, ou pays pour la diaspora','join.consent':"J'accepte que ces informations soient utilisées uniquement pour traiter ma demande d'adhésion.",'join.next':'Continuer','join.send':'Valider la demande','join.back':'Retour','join.done':'Démonstration terminée','join.doneP':"Rien n'a été envoyé au parti : la demande est conservée uniquement dans ce navigateur, pour apparaître dans la démo d'administration.",'join.toAdmin':"Voir dans l'administration",'join.again':'Recommencer',
+'err.name':'Indiquez votre nom complet.','err.contact':'Indiquez un numéro de téléphone ou un e-mail valide.','err.where':'Choisissez une région ou un pays.','err.consent':'Votre accord est nécessaire pour continuer.','recap.name':'Nom','recap.contact':'Contact','recap.where':'Territoire',
+'adm.h':'La plateforme derrière le site','adm.lead':"Cinq parcours de l'équipe, utilisables dès maintenant dans la démonstration avec des données fictives.",'adm.sample':"Données fictives · rien n'est publié ni envoyé",'adm.open':'Essayer ce parcours',
+'foot.about':'Parti politique sénégalais présidé par Amadou Bâ, lancé à Dakar le 9 septembre 2024.','foot.admin':'Administration','foot.by':'Conception','foot.proto':"Démonstration indépendante — ce n'est pas le site officiel de Nouvelle Responsabilité.",'diaspora':'Diaspora','pause':'Mettre le diaporama en pause','play':'Relancer le diaporama','photo':'Photo'},
+en:{skip:'Skip to content',lang:'Language','nav.party':'The party','nav.leader':'Amadou Bâ','nav.career':'Career','nav.news':'News','nav.themes':'Themes','nav.regions':'Regions','cta.join':'Join','cta.join2':'Join the movement','cta.leader':'About Amadou Bâ',
+'hero.sub':'The party led by Amadou Bâ, former Prime Minister of Senegal and now a member of the National Assembly.',
+'party.h':'A democratic, republican opposition.','party.lead':'Launched in Dakar on 9 September 2024, Nouvelle Responsabilité brings together, around Amadou Bâ, people who want to serve Senegal through dialogue, competence and respect for institutions.','party.s1':'Party launched in Dakar','party.s2':"Amadou Bâ's result in the 2024 presidential election",'party.s3':'MPs for the Jàmm ak Njariñ coalition, 2024',
+'leader.kicker':'Party president','leader.bio':"Trained as a tax inspector, he led Senegal's tax administration before serving as Minister of Economy and Finance, then Foreign Minister, and Prime Minister from 2022 to 2024. Runner-up in the 2024 presidential election, he has since sat in the National Assembly.",
+'f.born':'Born','f.bornV':'17 May 1961, Dakar','f.edu':'Education','f.eduV':'Cheikh Anta Diop University · ENAM','f.roles':'Offices','f.rolesV':'Prime Minister (2022–2024) · Minister of Foreign Affairs (2019–2020) · Minister of Economy and Finance (2013–2019)','f.now':'Today','f.nowV':'MP, president of Nouvelle Responsabilité',
+'tl.h':'A life in public service','tl.p':'Swipe through the years or use the arrows.','prev':'Previous step','next':'Next step',
+'media.h':'Speeches & statements','media.p':'Speeches, statements and press releases, dated and linked to their source.','f.all':'All','f.speech':'Speeches','f.statement':'Statements','f.release':'Press releases','f.video':'Videos','search':'Search','search.ph':'Search…','empty':'No results for this search.','sample':'Sample format','source':'Source','read':'Read','readSrc':'Read the source','close':'Close',
+'th.h':'Themes put forward for debate','th.p':'Six themes Nouvelle Responsabilité asked to include in the 2025 national dialogue.','th.status':'Press release, 18 May 2025',
+'rg.h':'Across Senegal and the diaspora','rg.p':'Choose a region, or search for your department.','rg.find':'Find a department','rg.west':'← West · Atlantic','rg.east':'East →','rg.dias':'Diaspora','rg.t1':'Territory','rg.t2':'Directory','rg.region':'Region','rg.deps':'Departments','rg.n':'departments','rg.demo':'Directory demonstration','rg.r1':'Appointed officers','rg.r2':'Local office','rg.r3':'Upcoming meetings','rg.r4':'Official contact','rg.none':'Published by the party','rg.dirNote':'These fields are empty in the demonstration: the party team will fill them in from the administration area.','rg.joinFrom':'Join from','rg.found':'found in the region of','rg.nf':'No department found.','rg.diasK':'Diaspora','rg.diasT':'Senegalese people abroad will find here the information the party publishes for their country of residence.','rg.diasEx':'Countries listed as examples.','rg.hintDef':'The 14 regions and their 46 departments.',
+'join.h':'Take your share of responsibility.','join.lead':'A three-step membership application, reviewed by the party before any membership card is issued.','join.s1':'Your details','join.s2':'Where are you?','join.s3':'Review','join.name':'Full name','join.contact':'Phone or email','join.where':'Region, or country for the diaspora','join.consent':'I agree that this information is used only to process my membership application.','join.next':'Continue','join.send':'Confirm application','join.back':'Back','join.done':'Demo complete','join.doneP':'Nothing was sent to the party: the application is kept only in this browser so it can appear in the administration demo.','join.toAdmin':'See it in the admin','join.again':'Start again',
+'err.name':'Enter your full name.','err.contact':'Enter a valid phone number or email.','err.where':'Choose a region or country.','err.consent':'Your consent is needed to continue.','recap.name':'Name','recap.contact':'Contact','recap.where':'Location',
+'adm.h':'The platform behind the site','adm.lead':'Five team workflows you can use right now in the demonstration, with fictitious data.','adm.sample':'Fictitious data · nothing is published or sent','adm.open':'Try this workflow',
+'foot.about':'Senegalese political party led by Amadou Bâ, launched in Dakar on 9 September 2024.','foot.admin':'Administration','foot.by':'Design','foot.proto':'Independent demonstration — not the official website of Nouvelle Responsabilité.','diaspora':'Diaspora','pause':'Pause slideshow','play':'Play slideshow','photo':'Photo'},
+wo:{skip:'Dem ci li ci biir',lang:'Làkk','nav.party':'Pàrti bi','nav.career':'Yoonu liggéey','nav.news':'Xibaar yi','nav.themes':'Mbir yi','nav.regions':'Diiwaan yi','cta.join':'Bokk','cta.join2':'Bokk ci yoon wi','cta.leader':'Xam Amadou Bâ',
+'leader.kicker':'Njiitu pàrti bi','tl.h':'Dund gu jaamu Nguur gi','media.h':'Kàddu yi','f.all':'Lépp','f.speech':'Waxtaan','f.video':'Widewo','search':'Seet','search.ph':'Seet…','close':'Tëj',
+'th.h':'Mbir yi ñu yóbbu ci waxtaan wi','rg.h':'Fépp ci Senegaal ak ci biti','rg.dias':'Ci biti','rg.t1':'Diiwaan','join.h':'Jël sa wàll ci yelleef bi.','join.s1':'Sa tur ak sa nimero','join.s2':'Fan nga nekk?','join.name':'Sa tur yépp','join.contact':'Telefon walla imeel','join.next':'Dem ci kanam','join.back':'Dellu','join.again':'Tàmbaliwaat','adm.h':'Jumtukaay bi ci ginnaaw site bi','diaspora':'Ci biti'}
+};
+let lang=store.get('nr-lang');if(!T[lang])lang='fr';
+const t=k=>(T[lang]&&T[lang][k])||T.fr[k]||k;
+const L=o=>o[lang]||o.fr;
+function applyLang(){
+  document.documentElement.lang=lang==='wo'?'wo':lang;
+  $$('[data-i18n]').forEach(el=>{el.textContent=t(el.dataset.i18n)});
+  $$('[data-i18n-ph]').forEach(el=>{el.placeholder=t(el.dataset.i18nPh)});
+  $$('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===lang));
+  $('#langCur').textContent=lang.toUpperCase();
+  $('#tlPrev').setAttribute('aria-label',t('prev'));$('#tlNext').setAttribute('aria-label',t('next'));
+  $$('.hero-ctrl .dot').forEach((d,i)=>d.setAttribute('aria-label',t('photo')+' '+(i+1)+' / 2'));setPP();
+  renderTimeline();renderMedia();renderThemes();renderRegions();fillWhere();updateStep();renderWF();
+}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-lang]');if(!b)return;lang=b.dataset.lang;store.set('nr-lang',lang);applyLang();closeLang();});
+
+/* ---------------- header: auto-hide, active link ---------------- */
+let drawerOpen=false,langOpen=false;
+const hdr=$('#hdr');let lastY=scrollY,ticking=false;
+const secIds=['parti','amadou-ba','parcours','actualites','themes','territoires'];
+function onScroll(){const y=Math.max(0,scrollY);hdr.classList.toggle('solid',y>30);
+  if(!drawerOpen&&!langOpen){if(y>lastY+6&&y>innerHeight*.5)hdr.classList.add('hide');else if(y<lastY-6||y<innerHeight*.5)hdr.classList.remove('hide');}
+  lastY=y;let cur='';secIds.forEach(id=>{const s=document.getElementById(id);if(s&&s.getBoundingClientRect().top<innerHeight*.35)cur=id});
+  $$('.nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#'+cur));ticking=false;}
+addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(onScroll)}},{passive:true});onScroll();
+hdr.addEventListener('focusin',()=>hdr.classList.remove('hide'));
+
+/* language popover (mobile) */
+const langBtn=$('#langBtn'),langPop=$('#langPop');
+function closeLang(){if(!langOpen)return;langOpen=false;langPop.classList.remove('open');langBtn.setAttribute('aria-expanded','false');}
+langBtn.addEventListener('click',e=>{e.stopPropagation();langOpen=!langOpen;langPop.classList.toggle('open',langOpen);langBtn.setAttribute('aria-expanded',langOpen);if(langOpen)langPop.querySelector('[aria-pressed="true"]').focus();});
+document.addEventListener('click',e=>{if(langOpen&&!e.target.closest('.lang-m'))closeLang();});
+
+/* drawer with focus trap */
+const drawer=$('#drawer'),burger=$('#burger'),main=$('#main');
+function setDrawer(o,restore){drawerOpen=o;if(o){drawer.hidden=false;requestAnimationFrame(()=>{drawer.classList.add('open');$('#closeDrawer').focus();});}else{drawer.classList.remove('open');setTimeout(()=>{if(!drawerOpen)drawer.hidden=true},reduce?0:300);}
+  burger.setAttribute('aria-expanded',o);document.documentElement.style.overflow=o?'hidden':'';
+  [main,$('.foot')].forEach(x=>{if(o)x.setAttribute('inert','');else x.removeAttribute('inert')});
+  if(!o&&restore!==false)burger.focus();}
+burger.addEventListener('click',()=>setDrawer(true));$('#closeDrawer').addEventListener('click',()=>setDrawer(false));
+$$('#drawer a').forEach(a=>a.addEventListener('click',()=>setDrawer(false,false)));
+drawer.addEventListener('keydown',e=>{if(e.key!=='Tab')return;const f=$$('a,button',drawer).filter(x=>x.offsetParent!==null);const a=f[0],z=f[f.length-1];
+  if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}});
+addEventListener('resize',()=>{if(drawerOpen&&innerWidth>1080)setDrawer(false,false)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(langOpen){closeLang();langBtn.focus();}else if(drawerOpen)setDrawer(false);else closeModal();}});
+
+/* ---------------- hero: crossfade only, no zoom ---------------- */
+const hero=$('#hero'),slides=$$('.slide',hero),dots=$$('.hero-ctrl .dot');let si=0,timer,paused=reduce;
+function show(i){si=i;slides.forEach((s,k)=>{s.classList.toggle('on',k===i);s.setAttribute('aria-hidden',k!==i)});
+  dots.forEach((d,k)=>{d.setAttribute('aria-current',k===i);const x=d.querySelector('i');x.replaceWith(x.cloneNode())});schedule();}
+function schedule(){clearTimeout(timer);if(!paused&&!document.hidden)timer=setTimeout(()=>show((si+1)%slides.length),8000);}
+function setPP(){const pp=$('#pp');pp.setAttribute('aria-label',paused?t('play'):t('pause'));$('#ppI').innerHTML=paused?'<path d="M8 5l11 7-11 7z"/>':'<rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/>';hero.classList.toggle('paused',paused);}
+$('#pp').addEventListener('click',()=>{paused=!paused;setPP();if(paused)clearTimeout(timer);else show((si+1)%slides.length);});
+dots.forEach(d=>d.addEventListener('click',()=>show(+d.dataset.i)));
+document.addEventListener('visibilitychange',schedule);
+/* preload slide 2 once the first image is in */
+const firstImg=$('.s-a img');const warm=()=>{const im=$('.s-b img');im.loading='eager';};if(firstImg.complete)setTimeout(warm,800);else firstImg.addEventListener('load',()=>setTimeout(warm,800));
+requestAnimationFrame(()=>setTimeout(()=>hero.classList.add('ready'),80));setPP();show(0);
+
+/* ---------------- reveal + counters ---------------- */
+const fmt=(v,dec)=>dec?(lang==='en'?v.toFixed(dec):v.toFixed(dec).replace('.',',')):Math.round(v).toString();
+function countUp(el){const end=parseFloat(el.dataset.count),dec=+(el.dataset.dec||0);if(reduce){el.textContent=fmt(end,dec);return;}const t0=performance.now(),d=1400;
+  (function step(now){const p=Math.min(1,(now-t0)/d),v=end*(1-Math.pow(1-p,3));el.textContent=fmt(v,dec);if(p<1)requestAnimationFrame(step)})(t0);}
+if('IntersectionObserver' in window){
+  const io=new IntersectionObserver(es=>es.forEach(en=>{if(!en.isIntersecting)return;en.target.classList.add('in');io.unobserve(en.target);$$('[data-count]',en.target).forEach(countUp);}),{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+  $$('.rv').forEach(el=>io.observe(el));
+  const em=$('#emblem');new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){em.classList.add('in');o.disconnect()}}),{threshold:.4}).observe(em);
+}else $$('.rv').forEach(el=>el.classList.add('in'));
+
+/* ---------------- timeline (text only: no photos implying dates) ---------------- */
+const TL=[
+ {y:'1961',fr:['Naissance à Dakar',"Amadou Bâ naît le 17 mai 1961 à Dakar. Il étudie à l'Université Cheikh Anta Diop et à l'École nationale d'administration et de magistrature (ENAM)."],en:['Born in Dakar','Amadou Bâ was born on 17 May 1961 in Dakar. He studied at Cheikh Anta Diop University and the National School of Administration and Magistracy (ENAM).'],src:'Vie publique Sénégal'},
+ {y:'1989',fr:["Entrée dans l'administration fiscale","Inspecteur des impôts stagiaire à Diourbel, puis chef d'une division de TVA à la Direction générale des impôts et domaines, à Dakar."],en:['Joins the tax administration','Trainee tax inspector in Diourbel, then head of a VAT division at the Directorate-General of Taxes and Domains in Dakar.'],src:'Ndarinfo, 2022'},
+ {y:'2006',fr:['Directeur général des Impôts et des Domaines','À la tête de la DGID, il supervise le nouveau Code général des impôts, entré en vigueur en janvier 2013.'],en:['Director-General of Taxes and Domains','As head of the DGID he oversaw the new General Tax Code, in force from January 2013.'],src:'SenePlus · Seneweb'},
+ {y:'2013',fr:["Ministre de l'Économie et des Finances","Nommé le 2 septembre 2013, il conduit l'économie et les finances du pays jusqu'en avril 2019."],en:['Minister of Economy and Finance',"Appointed on 2 September 2013, he led the country's economy and finance portfolio until April 2019."],src:'Vie publique Sénégal'},
+ {y:'2019',fr:['Ministre des Affaires étrangères',"Ministre des Affaires étrangères et des Sénégalais de l'extérieur d'avril 2019 à novembre 2020."],en:['Minister of Foreign Affairs','Minister of Foreign Affairs and Senegalese Abroad from April 2019 to November 2020.'],src:'Vie publique Sénégal'},
+ {y:'2022',fr:['Premier ministre',"Nommé le 17 septembre 2022 lors du rétablissement de la fonction, il dirige deux gouvernements jusqu'au 6 mars 2024."],en:['Prime Minister','Appointed on 17 September 2022 when the post was restored, he led two governments until 6 March 2024.'],src:'Primature · Vie publique'},
+ {y:'2024',fr:['Candidat à la présidentielle','Candidat de la coalition Benno Bokk Yaakaar le 24 mars 2024, il arrive deuxième avec 1 605 086 voix (35,79 %).'],en:['Presidential candidate','Candidate of the Benno Bokk Yaakaar coalition on 24 March 2024, he came second with 1,605,086 votes (35.79%).'],src:'Conseil constitutionnel, décision 7/E/2024'},
+ {y:'2024',fr:['Fondation de Nouvelle Responsabilité','Le 9 septembre 2024, à Dakar, il lance Nouvelle Responsabilité.'],en:['Founds Nouvelle Responsabilité','On 9 September 2024, in Dakar, he launched Nouvelle Responsabilité.'],src:'APS'},
+ {y:'2024',fr:["Député à l'Assemblée nationale","Tête de liste nationale de la coalition Jàmm ak Njariñ aux législatives du 17 novembre 2024, il est élu député."],en:['Member of the National Assembly',"Leading the Jàmm ak Njariñ coalition's national list in the 17 November 2024 election, he was elected to parliament."],src:'Conseil constitutionnel'}
+];
+let ti=0;const rail=$('#tlRail');
+function renderTimeline(){rail.innerHTML='';
+  TL.forEach((s,i)=>{const b=document.createElement('button');b.type='button';b.className='tl-node';b.id='tln'+i;b.setAttribute('role','tab');b.setAttribute('aria-controls','tlPanel');
+    b.innerHTML='<span class="yr"></span><span class="dot" aria-hidden="true"></span><span class="lbl"></span>';b.querySelector('.yr').textContent=s.y;b.querySelector('.lbl').textContent=L(s)[0];
+    b.addEventListener('click',()=>selTL(i,true));
+    b.addEventListener('keydown',e=>{let n=null;if(e.key==='ArrowRight')n=Math.min(TL.length-1,ti+1);if(e.key==='ArrowLeft')n=Math.max(0,ti-1);if(e.key==='Home')n=0;if(e.key==='End')n=TL.length-1;if(n!==null){e.preventDefault();selTL(n,true,true)}});
+    rail.appendChild(b);});paintTL();}
+function paintTL(){const s=TL[ti],x=L(s);$('#tlYr').textContent=s.y;$('#tlT').textContent=x[0];$('#tlD').textContent=x[1];$('#tlS').textContent=t('source')+' : '+s.src;$('#tlC').textContent=(ti+1)+' / '+TL.length;
+  $('#tlPanel').setAttribute('aria-labelledby','tln'+ti);$('#tlPrev').disabled=ti===0;$('#tlNext').disabled=ti===TL.length-1;
+  $$('.tl-node',rail).forEach((n,i)=>{n.setAttribute('aria-selected',i===ti);n.tabIndex=i===ti?0:-1});}
+function selTL(i,scroll,focus){ti=i;paintTL();const n=rail.children[i];if(scroll&&n)rail.scrollTo({left:n.offsetLeft-rail.offsetLeft-8,behavior:reduce?'auto':'smooth'});if(focus&&n)n.focus({preventScroll:true});}
+$('#tlPrev').addEventListener('click',()=>selTL(Math.max(0,ti-1),true));$('#tlNext').addEventListener('click',()=>selTL(Math.min(TL.length-1,ti+1),true));
+
+/* ---------------- media (real items: text only; photo only on the labelled sample) ---------------- */
+const M=[
+ {type:'speech',date:'2026-11-18',fr:["Débat sur la loi de finances 2027 : l'appel au dialogue","À l'Assemblée nationale, Amadou Bâ appelle les forces politiques à s'accorder sur le budget face à l'impasse sur le projet de loi de finances 2027."],en:['2027 budget debate: a call for dialogue','In the National Assembly, Amadou Bâ urged political forces to agree on the budget amid deadlock over the 2027 finance bill.'],src:'Tambacounda.info',url:'https://www.tambacounda.info/2026/11/18/amadou-ba-depute-nouvelle-responsabilite-il-nest-pas-preferable-de-ne-pas-disposer-dun-budget/'},
+ {type:'statement',date:'2026-10-22',fr:['Appel à la responsabilité nationale',"Dans un texte, Amadou Bâ met en garde contre un risque d'impasse budgétaire autour de la loi de finances rectificative 2026 et appelle à une concertation."],en:['A call for national responsibility','In a written statement, Amadou Bâ warned of a budget deadlock over the 2026 supplementary finance law and called for consultation.'],src:'La Vie Sénégalaise',url:'https://laviesenegalaise.com/amadou-ba-appelle-a-la-responsabilite-nationale/'},
+ {type:'statement',date:'2026-05-27',fr:["Message à l'occasion de la Tabaski","Message de vœux d'Amadou Bâ à la communauté musulmane et aux familles sénégalaises."],en:['Tabaski message',"Amadou Bâ's greetings to the Muslim community and Senegalese families."],src:'Senegal7',url:'https://senegal7.com/tabaski-2026-le-message-damadou-ba-de-la-nouvelle-responsabilite/'},
+ {type:'release',date:'2025-05-18',fr:['Nouvelle Responsabilité participe au dialogue national','Le parti annonce sa participation au dialogue national du 28 mai au 4 juin 2025 et propose six thèmes de discussion.'],en:['Nouvelle Responsabilité joins the national dialogue','The party announced it would take part in the national dialogue of 28 May to 4 June 2025 and proposed six themes for discussion.'],src:'Le Soleil',url:'https://lesoleil.sn/actualites/politique/dialogue-national-la-nouvelle-responsabilite-confirme-sa-participation/'},
+ {type:'speech',date:'2024-09-09',fr:['Lancement de Nouvelle Responsabilité',"À Dakar, Amadou Bâ lance Nouvelle Responsabilité, qu'il présente comme un outil au service de la justice sociale, de la paix et de la prospérité partagée."],en:['Launch of Nouvelle Responsabilité','In Dakar, Amadou Bâ launched Nouvelle Responsabilité, presenting it as a tool for social justice, peace and shared prosperity.'],src:'APS via AllAfrica',url:'https://fr.allafrica.com/stories/202409100178.html'},
+ {type:'video',sample:true,img:'img/speak-hand.webp',fr:['Format vidéo : discours filmé',"Exemple de présentation d'une vidéo officielle, avec sous-titres en français, wolof et anglais. Aucune vidéo réelle n'est publiée dans la démonstration."],en:['Video format: recorded speech','Example of how an official video will be presented, with French, Wolof and English subtitles. No real video is published in the demonstration.']}
+];
+let mf='all';const typeKey={speech:'f.speech',statement:'f.statement',release:'f.release',video:'f.video'};
+function dateTxt(d){const dt=new Date(d+'T12:00:00');return dt.toLocaleDateString(lang==='en'?'en-GB':'fr-FR',{day:'numeric',month:'long',year:'numeric'});}
+function renderMedia(){const q=($('#q').value||'').toLowerCase().trim();const w=$('#mediaWrap');w.innerHTML='';
+  const list=M.filter(m=>(mf==='all'||m.type===mf)&&(!q||(L(m).join(' ')+' '+m.fr.join(' ')+' '+(m.src||'')).toLowerCase().includes(q)));
+  if(!list.length){const e=document.createElement('div');e.className='empty';e.style.gridColumn='1/-1';e.textContent=t('empty');w.appendChild(e);return;}
+  const [f,...rest]=list;
+  const fb=document.createElement('button');fb.type='button';fb.className='feat'+(f.sample?' vid':'');
+  if(f.sample){fb.innerHTML='<img alt="" loading="lazy"><span class="play" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="#0B1F3A"><path d="M8 5l11 7-11 7z"/></svg></span><div class="tx"><span class="d"></span><h3></h3></div>';fb.querySelector('img').src=f.img;}
+  else fb.innerHTML='<span class="d"></span><h3></h3><span class="more"></span>';
+  fb.querySelector('.d').textContent=f.sample?t('sample'):t(typeKey[f.type])+' · '+dateTxt(f.date);fb.querySelector('h3').textContent=L(f)[0];if(!f.sample)fb.querySelector('.more').textContent=t('read')+' →';
+  fb.addEventListener('click',()=>openModal(f,fb));w.appendChild(fb);
+  const ul=document.createElement('ul');ul.className='rows';
+  rest.forEach(m=>{const li=document.createElement('li');const b=document.createElement('button');b.type='button';b.className='row';
+    b.innerHTML='<span class="d"></span><span class="t"><span class="k"></span></span><span class="ar" aria-hidden="true">→</span>';
+    b.querySelector('.d').textContent=m.sample?'—':dateTxt(m.date);const k=b.querySelector('.k');k.textContent=m.sample?t('sample'):t(typeKey[m.type]);if(m.sample)k.classList.add('s');
+    b.querySelector('.t').append(L(m)[0]);b.addEventListener('click',()=>openModal(m,b));li.appendChild(b);ul.appendChild(li);});
+  if(rest.length)w.appendChild(ul);}
+$('#filters').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;mf=b.dataset.f;$$('#filters button').forEach(x=>x.setAttribute('aria-pressed',x===b));renderMedia();});
+$('#q').addEventListener('input',renderMedia);
+const modal=$('#modal');let lastFocus;
+function openModal(m,from){lastFocus=from;$('#mK').textContent=m.sample?t('sample'):t(typeKey[m.type])+' · '+dateTxt(m.date);$('#mT').textContent=L(m)[0];$('#mD').textContent=L(m)[1];
+  const s=$('#mSrc');if(m.url){s.hidden=false;s.href=m.url;s.textContent=t('readSrc')+' — '+m.src+' ↗';}else s.hidden=true;
+  modal.hidden=false;modal.classList.add('open');document.documentElement.style.overflow='hidden';$('#mClose').focus();}
+function closeModal(){if(modal.hidden)return;modal.classList.remove('open');modal.hidden=true;document.documentElement.style.overflow='';if(lastFocus)lastFocus.focus();}
+$('#mClose').addEventListener('click',closeModal);modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});
+modal.addEventListener('keydown',e=>{if(e.key!=='Tab')return;const f=$$('a:not([hidden]),button',modal);const a=f[0],z=f[f.length-1];if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}});
+
+/* ---------------- themes ---------------- */
+const ic={debt:'<path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/>',cost:'<circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M3 4h2l2.4 11h11l2-8H6.5"/>',youth:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>',tax:'<path d="M12 3v18M5 7h14M5 7l-3 7h6zM19 7l-3 7h6z"/>',mig:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>',free:'<path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/>'};
+const TH=[
+ {k:'debt',fr:['Maîtrise de la dette publique',"La soutenabilité de la dette de l'État et ses effets sur l'économie."],en:['Managing public debt','The sustainability of state debt and its effects on the economy.']},
+ {k:'cost',fr:['Lutte contre la vie chère',"Le coût de la vie et le pouvoir d'achat des ménages."],en:['Tackling the cost of living','Living costs and household purchasing power.']},
+ {k:'youth',fr:['Emploi des jeunes',"L'accès des jeunes Sénégalais à un emploi."],en:['Jobs for young people',"Young Senegalese people's access to work."]},
+ {k:'tax',fr:['Équité fiscale',"La répartition juste de l'effort fiscal."],en:['Tax fairness','A fair distribution of the tax burden.']},
+ {k:'mig',fr:['Gestion des migrations','Les départs, les retours et la diaspora.'],en:['Managing migration','Departures, returns and the diaspora.']},
+ {k:'free',fr:['Libertés fondamentales','La préservation des libertés publiques et individuelles.'],en:['Fundamental freedoms','Protecting public and individual freedoms.']}
+];
+let thi=0;
+const svgI=(k,c,s)=>'<svg width="'+s+'" height="'+s+'" viewBox="0 0 24 24" fill="none" stroke="'+c+'" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+ic[k]+'</svg>';
+function renderThemes(focus){const l=$('#thList');l.innerHTML='';
+  TH.forEach((x,i)=>{const b=document.createElement('button');b.type='button';b.id='th'+i;b.setAttribute('role','tab');b.setAttribute('aria-controls','thPanel');b.setAttribute('aria-selected',i===thi);b.tabIndex=i===thi?0:-1;b.innerHTML=svgI(x.k,'currentColor',24)+'<span></span>';b.querySelector('span').textContent=L(x)[0];
+    b.addEventListener('click',()=>{thi=i;renderThemes(true)});
+    b.addEventListener('keydown',e=>{const n=/Arrow(Down|Right)/.test(e.key)?1:/Arrow(Up|Left)/.test(e.key)?-1:0;if(n){e.preventDefault();thi=(thi+n+TH.length)%TH.length;renderThemes(true);}});l.appendChild(b);});
+  const x=TH[thi];$('#thPanel').setAttribute('aria-labelledby','th'+thi);$('#thIc').innerHTML=svgI(x.k,'currentColor',36);$('#thT').textContent=L(x)[0];$('#thD').textContent=L(x)[1];
+  if(focus){const b=l.children[thi];b.focus({preventScroll:true});if(l.scrollWidth>l.clientWidth)l.scrollTo({left:b.offsetLeft-20,behavior:reduce?'auto':'smooth'});}}
+
+/* ---------------- territorial explorer ---------------- */
+/* Administrative regions and departments of Senegal (public administrative division). No party data is invented. */
+const R=[
+ ['Louga',0,1,['Kébémer','Linguère','Louga']],['Saint-Louis',0,2,['Dagana','Podor','Saint-Louis']],['Matam',0,3,['Kanel','Matam','Ranérou-Ferlo']],
+ ['Dakar',1,0,['Dakar','Guédiawaye','Keur Massar','Pikine','Rufisque']],['Thiès',1,1,['Mbour','Thiès','Tivaouane']],['Diourbel',1,2,['Bambey','Diourbel','Mbacké']],['Tambacounda',1,4,['Bakel','Goudiry','Koumpentoum','Tambacounda']],
+ ['Fatick',2,1,['Fatick','Foundiougne','Gossas']],['Kaolack',2,2,['Guinguinéo','Kaolack','Nioro du Rip']],['Kaffrine',2,3,['Birkelane','Kaffrine','Koungheul','Malem-Hodar']],
+ ['Ziguinchor',3,1,['Bignona','Oussouye','Ziguinchor']],['Sédhiou',3,2,['Bounkiling','Goudomp','Sédhiou']],['Kolda',3,3,['Kolda','Médina Yoro Foulah','Vélingara']],['Kédougou',3,4,['Kédougou','Salémata','Saraya']]
+];
+const D=['France','Italie','Espagne','États-Unis',"Côte d'Ivoire",'Mauritanie','Gabon','Belgique'];
+let rsel='Dakar',rtab=1,hitDep=null;
+const norm=s=>s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z]/g,'');
+function renderRegions(){const g=$('#tiles');g.innerHTML='';const q=norm($('#rgq').value||'');
+  for(let r=0;r<4;r++)for(let c=0;c<5;c++){const reg=R.find(x=>x[1]===r&&x[2]===c);
+    if(!reg){const s=document.createElement('span');s.className='tile void';s.setAttribute('aria-hidden','true');g.appendChild(s);continue;}
+    const b=document.createElement('button');b.type='button';b.className='tile';b.textContent=reg[0];b.setAttribute('aria-pressed',rsel===reg[0]);
+    if(q&&(norm(reg[0]).includes(q)||reg[3].some(d=>norm(d).includes(q))))b.classList.add('hit');
+    b.addEventListener('click',()=>pick(reg[0]));g.appendChild(b);}
+  const d=$('#dias');d.innerHTML='';D.forEach(n=>{const b=document.createElement('button');b.type='button';b.textContent=n;b.setAttribute('aria-pressed',rsel===n);b.addEventListener('click',()=>pick(n));d.appendChild(b);});
+  paintCard();}
+function paintCard(){const reg=R.find(x=>x[0]===rsel);
+  $('#rgKind').textContent=reg?t('rg.region'):t('rg.diasK');$('#rgName').textContent=rsel;
+  const p=$('#rp1');p.innerHTML='';
+  if(reg){const h=document.createElement('p');h.style.cssText='margin:0;font-weight:700';h.textContent=reg[3].length+' '+t('rg.n');p.appendChild(h);
+    const w=document.createElement('div');w.className='deps';reg[3].forEach(n=>{const s=document.createElement('span');s.textContent=n;if(hitDep===n)s.classList.add('hit');w.appendChild(s)});p.appendChild(w);}
+  else{const x=document.createElement('p');x.className='rnote';x.style.marginTop='0';x.textContent=t('rg.diasT');const y=document.createElement('p');y.className='rnote';y.textContent=t('rg.diasEx');p.append(x,y);}
+  [['rt1','rp1',1],['rt2','rp2',2]].forEach(([b,pn,n])=>{$('#'+b).setAttribute('aria-selected',rtab===n);$('#'+b).tabIndex=rtab===n?0:-1;$('#'+pn).hidden=rtab!==n;});
+  $('#rgJoin').textContent=t('rg.joinFrom')+' '+(reg?rsel:rsel)+' →';}
+function pick(n,keepHit){rsel=n;if(!keepHit)hitDep=null;renderRegions();if(innerWidth<=1080&&!keepHit)$('#rgCard').scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});}
+$('#rt1').addEventListener('click',()=>{rtab=1;paintCard()});$('#rt2').addEventListener('click',()=>{rtab=2;paintCard()});
+$$('.rtabs [role=tab]').forEach(b=>b.addEventListener('keydown',e=>{if(/Arrow(Left|Right)/.test(e.key)){e.preventDefault();rtab=rtab===1?2:1;paintCard();$('#rt'+rtab).focus();}}));
+$('#rgq').addEventListener('input',()=>{const q=norm($('#rgq').value);const hint=$('#rgHint');
+  if(q.length<2){hint.textContent=t('rg.hintDef');hitDep=null;renderRegions();return;}
+  let found=null;for(const r of R){const d=r[3].find(x=>norm(x).startsWith(q))||r[3].find(x=>norm(x).includes(q));if(d){found=[r[0],d];break;}if(norm(r[0]).startsWith(q)){found=[r[0],null];break;}}
+  if(found){hitDep=found[1];hint.textContent=found[1]?found[1]+' : '+t('rg.found')+' '+found[0]+'.':'';rtab=1;pick(found[0],true);}else{hint.textContent=t('rg.nf');renderRegions();}});
+$('#rgJoin').addEventListener('click',()=>{const reg=R.find(x=>x[0]===rsel);preWhere=reg?rsel:t('diaspora')+' · '+rsel;fillWhere();step=1;updateStep();});
+
+/* ---------------- membership demo (local only) ---------------- */
+let step=1,preWhere='';const f=$('#joinForm');
+function fillWhere(){const s=$('#whereSel');const v=preWhere||s.value;s.innerHTML='';const o0=document.createElement('option');o0.value='';o0.textContent='—';s.appendChild(o0);
+  const g1=document.createElement('optgroup');g1.label='Sénégal';R.map(x=>x[0]).sort((a,b)=>a.localeCompare(b,'fr')).forEach(n=>{const o=document.createElement('option');o.value=n;o.textContent=n;g1.appendChild(o)});s.appendChild(g1);
+  const g2=document.createElement('optgroup');g2.label=t('diaspora');D.forEach(n=>{const o=document.createElement('option');o.value=t('diaspora')+' · '+n;o.textContent=n;g2.appendChild(o)});s.appendChild(g2);s.value=v;preWhere='';}
+function updateStep(){$$('[data-step]',f).forEach(d=>d.hidden=+d.dataset.step!==step);$$('.steps span',f).forEach((s,i)=>s.classList.toggle('on',i<Math.min(step,3)));
+  $('#back').hidden=step===1||step===4;$('#formBtns').hidden=step===4;$('#next').textContent=step===3?t('join.send'):t('join.next');
+  if(step===3){const r=$('#recap');r.innerHTML='';[['recap.name',f.name.value],['recap.contact',f.contact.value],['recap.where',f.where.value]].forEach(([k,v])=>{const p=document.createElement('div');const b=document.createElement('b');b.textContent=t(k)+' : ';p.append(b,v);r.appendChild(p)});}}
+function err(id,msg,el){$('#e-'+id).textContent=msg||'';if(el)el.setAttribute('aria-invalid',!!msg);}
+f.addEventListener('submit',e=>{e.preventDefault();
+  if(step===1){const n=f.name.value.trim(),c=f.contact.value.trim();const okN=n.length>=3;const okC=/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(c)||/^\+?[\d\s().-]{8,}$/.test(c);
+    err('name',okN?'':t('err.name'),f.name);err('contact',okC?'':t('err.contact'),f.contact);if(!okN){f.name.focus();return}if(!okC){f.contact.focus();return}step=2;}
+  else if(step===2){if(!f.where.value){err('where',t('err.where'),f.where);f.where.focus();return}err('where','',f.where);step=3;}
+  else if(step===3){if(!f.consent.checked){err('consent',t('err.consent'));f.consent.focus();return}err('consent');
+    const apps=store.get('nr-demo-apps')||[];apps.unshift({id:Date.now(),name:f.name.value.trim(),contact:f.contact.value.trim(),where:f.where.value,date:new Date().toISOString(),status:'pending'});store.set('nr-demo-apps',apps.slice(0,20));step=4;}
+  updateStep();const h=$('[data-step="'+step+'"] h3',f);if(h){h.tabIndex=-1;h.focus();}});
+$('#back').addEventListener('click',()=>{step=Math.max(1,step-1);updateStep();$('[data-step="'+step+'"] h3',f).focus();});
+$('#restart').addEventListener('click',()=>{f.reset();step=1;updateStep();f.name.focus();});
+
+/* ---------------- admin workflows preview ---------------- */
+const WF=[
+ {id:'actualites',i:'1',fr:['Rédiger une actualité','admin · actualités'],en:['Write a news item','admin · news'],
+  body:'<h4>Nouvelle actualité</h4><p class="sub">Brouillon fictif · enregistré dans le navigateur</p><div class="mock-f"><div><label>Titre</label>[Exemple] Rencontre avec les militants de Thiès</div><div><label>Catégorie</label>Actualité</div><div><label>Statut</label><span class="pill p-wait">Brouillon</span> → <span class="pill p-rev">En relecture</span> → <span class="pill p-ok">Publié</span></div></div>'},
+ {id:'adhesions',i:'2',fr:["Examiner une demande d'adhésion",'admin · adhésions'],en:['Review a membership application','admin · applications'],
+  body:'<h4>Demande D-0142</h4><p class="sub">Demande fictive</p><div class="mrow"><span>Nom</span><b>Exemple A. Diallo</b></div><div class="mrow"><span>Contact</span><span>+221 77 ••• •• 01</span></div><div class="mrow"><span>Région</span><span>Thiès</span></div><div class="mrow"><span>Statut</span><span class="pill p-wait">À examiner</span></div>'},
+ {id:'evenements',i:'3',fr:['Gérer un événement','admin · événements'],en:['Manage an event','admin · events'],
+  body:'<h4>Événements</h4><p class="sub">Événements fictifs</p><div class="mrow"><span>[Exemple] Réunion d\'information · Kaolack</span><span class="pill p-ok">Programmé</span></div><div class="mrow"><span>[Exemple] Permanence ouverte · Ziguinchor</span><span class="pill p-wait">Brouillon</span></div><div class="mrow"><span>[Exemple] Rencontre diaspora · en ligne</span><span class="pill p-no">Annulé</span></div>'},
+ {id:'apercu',i:'4',fr:['Prévisualiser en trois langues','admin · aperçu'],en:['Preview in three languages','admin · preview'],
+  body:'<h4>Aperçu multilingue</h4><p class="sub">Comparer avant publication</p><div class="mlang"><span class="on">FR</span><span>WO</span><span>EN</span></div><div class="mock-f"><div><label>FR · validé</label>Prenez votre part de responsabilité.</div><div><label>WO · à relire</label>Jël sa wàll ci yelleef bi.</div><div><label>EN · validé</label>Take your share of responsibility.</div></div>'},
+ {id:'roles',i:'5',fr:['Attribuer les rôles','admin · utilisateurs'],en:['Assign roles','admin · users'],
+  body:'<h4>Utilisateurs</h4><p class="sub">Comptes fictifs</p><div class="mrow"><span>editeur.demo</span><span class="pill p-rev">Éditeur</span></div><div class="mrow"><span>adhesions.demo</span><span class="pill p-wait">Resp. adhésions</span></div><div class="mrow"><span>admin.demo</span><span class="pill p-ok">Administrateur</span></div>'}
+];
+let wfi=0;
+function renderWF(focus){const tb=$('#wfTabs');tb.innerHTML='';WF.forEach((w,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('role','tab');b.id='wf'+i;b.setAttribute('aria-controls','wfPanel');b.setAttribute('aria-selected',i===wfi);b.tabIndex=i===wfi?0:-1;b.innerHTML='<i aria-hidden="true">'+w.i+'</i><span></span>';b.querySelector('span').textContent=L(w)[0];
+  b.addEventListener('click',()=>{wfi=i;renderWF(true)});b.addEventListener('keydown',e=>{const n=/Arrow(Down|Right)/.test(e.key)?1:/Arrow(Up|Left)/.test(e.key)?-1:0;if(n){e.preventDefault();wfi=(wfi+n+WF.length)%WF.length;renderWF(true)}});tb.appendChild(b);});
+  const w=WF[wfi];$('#wfPanel').innerHTML=w.body;$('#wfPanel').setAttribute('aria-labelledby','wf'+wfi);$('#wfUrl').textContent=L(w)[1];$('#wfGo').href='admin.html#'+w.id;
+  if(focus){const b=tb.children[wfi];b.focus({preventScroll:true});if(tb.scrollWidth>tb.clientWidth)tb.scrollTo({left:b.offsetLeft-20,behavior:reduce?'auto':'smooth'});}}
+
+$('#rgHint').textContent='';
+applyLang();
+$('#rgHint').textContent=t('rg.hintDef');
+})();
+</script>
+</body>
+</html>

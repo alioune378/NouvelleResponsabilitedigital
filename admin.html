@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#06142A">
+<meta name="robots" content="noindex, nofollow">
+<title>NR · Démonstration d'administration</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0B1F3A;--navy-2:#132C50;--navy-3:#06142A;--green:#00853F;--gold:#D4AF37;--mist:#F3F6FA;--line:#E1E7EF;--ink:#0B1F3A;--ink-2:#4A5B74;--red:#B42318;
+--display:'Bricolage Grotesque',system-ui,sans-serif;--body:'Instrument Sans',system-ui,sans-serif;--sab:env(safe-area-inset-bottom,0px);--sat:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--body);color:var(--ink);background:var(--mist);-webkit-font-smoothing:antialiased;overflow-x:clip}
+button,input,select,textarea{font:inherit;color:inherit}button{cursor:pointer}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+a{color:inherit}
+.demo-bar{background:var(--gold);color:var(--navy);text-align:center;font-size:13px;font-weight:700;padding:calc(7px + var(--sat)) 12px 7px}
+.demo-bar a{font-weight:700}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--green);color:#fff;border:0;border-radius:999px;font-weight:700;padding:0 18px;min-height:44px;text-decoration:none;white-space:nowrap}
+.btn.navy{background:var(--navy)}.btn.ghost{background:#fff;color:var(--ink);border:2px solid var(--line)}.btn.red{background:#fff;color:var(--red);border:2px solid #F3C7C2}
+.btn.sm{min-height:36px;padding:0 14px;font-size:14px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+/* login */
+.login{min-height:calc(100vh - 34px);display:grid;grid-template-columns:1fr 1fr}
+.login .art{position:relative;background:var(--navy-3);overflow:hidden}
+.login .art img.ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% 20%;opacity:.55}
+.login .art::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(6,20,42,.95),rgba(6,20,42,.2))}
+.login .art div{position:absolute;z-index:1;left:48px;bottom:48px;right:48px;color:#fff}
+.login .art h1{font-family:var(--display);font-weight:800;font-size:52px;letter-spacing:-.03em;line-height:.95;margin:16px 0 0}
+.login .box{display:flex;flex-direction:column;justify-content:center;padding:48px;max-width:520px;margin:auto;width:100%}
+.login h2{font-family:var(--display);font-size:32px;margin:0}
+.role{display:flex;flex-direction:column;gap:10px;margin:22px 0 0;border:0;padding:0}
+.role label{display:flex;gap:14px;align-items:flex-start;background:#fff;border:2px solid var(--line);border-radius:16px;padding:14px 16px;cursor:pointer}
+.role input{margin-top:4px;accent-color:var(--green);width:18px;height:18px;flex:none}
+.role label:has(input:checked){border-color:var(--green)}
+.role b{display:block}.role span{font-size:14px;color:var(--ink-2)}
+.prodnote{margin-top:16px;font-size:14px;color:var(--ink-2);background:#fff;border-radius:14px;padding:12px 14px;border:1px dashed #C9D3DF;display:flex;gap:10px}
+/* app */
+.app{display:grid;grid-template-columns:240px 1fr;min-height:calc(100vh - 34px)}
+.side{background:var(--navy-3);color:#B8C4D4;padding:20px 14px;display:flex;flex-direction:column;gap:2px;position:sticky;top:0;height:100vh;overflow-y:auto}
+.side img{height:42px;width:auto;margin:0 8px 20px;align-self:flex-start}
+.side a{display:flex;align-items:center;gap:12px;text-decoration:none;padding:11px 12px;border-radius:12px;font-weight:600;font-size:15px}
+.side a:hover{background:rgba(255,255,255,.06)}
+.side a[aria-current="page"]{background:rgba(255,255,255,.12);color:#fff}
+.side a.off{opacity:.35}
+.side .grp{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#6F819A;margin:14px 12px 4px}
+.side .who{margin-top:auto;background:rgba(255,255,255,.06);border-radius:14px;padding:12px;font-size:13px}
+.side .who b{color:#fff;display:block;font-size:14px}
+.side .who select{width:100%;margin-top:8px;background:var(--navy-2);color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:8px}
+main{padding:26px 32px 80px;min-width:0}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.top h1{font-family:var(--display);font-weight:800;font-size:34px;letter-spacing:-.02em;margin:0;line-height:1.05}
+.top p{margin:6px 0 0;color:var(--ink-2);font-size:15px}
+.tag{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:700;white-space:nowrap}
+.t-demo{background:#FFF4D6;color:#7A5B00}.t-wait{background:#FFF4D6;color:#7A5B00}.t-ok{background:#DDF3E6;color:#00612E}.t-rev{background:#E6EEF8;color:#1E3A66}.t-no{background:#FDE8E6;color:var(--red)}.t-draft{background:#EEF0F3;color:#4A5B74}.t-local{background:var(--navy);color:#fff}.t-prod{background:#fff;color:var(--ink-2);border:1.5px dashed #A9B6C6}
+.grid{display:grid;gap:16px}
+.card{background:#fff;border-radius:18px;padding:20px;border:1px solid var(--line)}
+.kpis{grid-template-columns:repeat(4,1fr);margin-top:22px}
+.kpi b{display:block;font-family:var(--display);font-weight:800;font-size:36px;letter-spacing:-.02em}
+.kpi span{color:var(--ink-2);font-size:14px}
+h2.s{font-family:var(--display);font-size:20px;margin:0 0 12px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;color:var(--ink-2);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.05em;padding:10px 12px;border-bottom:1px solid var(--line)}
+td{padding:13px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+tr:last-child td{border:0}
+tr.sel td{background:#F2F8F4}
+.acts{display:flex;gap:6px;flex-wrap:wrap}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:18px 0 14px}
+.chips button{border:2px solid var(--line);background:#fff;border-radius:999px;padding:0 14px;min-height:38px;font-weight:700;font-size:14px}
+.chips button[aria-pressed="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.split{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:16px;margin-top:18px;align-items:start}
+.f{display:flex;flex-direction:column;gap:6px;margin-top:14px;font-weight:700;font-size:14px}
+.f input,.f select,.f textarea{font-weight:500;font-size:16px;padding:11px 14px;border:2px solid var(--line);border-radius:12px;background:#fff;width:100%}
+.f textarea{min-height:120px;resize:vertical;line-height:1.5}
+.f input:focus,.f select:focus,.f textarea:focus{border-color:var(--green);outline:0}
+.f small{font-weight:500;color:var(--ink-2)}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ltabs{display:flex;gap:4px;background:var(--mist);border-radius:999px;padding:4px;margin-top:16px;width:max-content}
+.ltabs button{border:0;background:none;border-radius:999px;min-height:36px;padding:0 16px;font-weight:700;font-size:14px}
+.ltabs button[aria-selected="true"]{background:#fff;box-shadow:0 2px 8px -4px rgba(11,31,58,.4)}
+.err{color:var(--red);font-size:14px;font-weight:600;min-height:18px;margin-top:6px}
+.list-item{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 4px;border-bottom:1px solid var(--line)}
+.list-item:last-child{border:0}
+.list-item b{display:block;font-size:15px}.list-item small{color:var(--ink-2);font-size:13px}
+.prev{border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.prev .ph{background:var(--navy);color:#fff;padding:20px}
+.prev .ph .k{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#F1D98A}
+.prev .ph h3{font-family:var(--display);font-size:24px;margin:8px 0 0;line-height:1.1}
+.prev .pb{padding:16px 20px;font-size:15px;line-height:1.6;color:var(--ink-2);white-space:pre-wrap}
+.prev .fallback{display:block;margin:0 20px 16px;font-size:13px;background:#FFF4D6;color:#7A5B00;border-radius:10px;padding:8px 12px}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:15px;padding:8px 0}
+.check input{width:20px;height:20px;accent-color:var(--green);flex:none;margin-top:1px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:8px 18px;font-size:15px;margin:14px 0}
+.kv dt{color:var(--ink-2)}.kv dd{margin:0;font-weight:600}
+.log div{display:flex;gap:14px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px}.log time{color:var(--ink-2);min-width:128px;font-variant-numeric:tabular-nums}
+.note{font-size:13px;color:var(--ink-2);margin-top:12px;line-height:1.55}
+.empty{padding:22px;text-align:center;color:var(--ink-2)}
+.lib{grid-template-columns:repeat(auto-fill,minmax(170px,1fr));margin-top:18px}
+.lib figure{margin:0;background:#fff;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+.lib img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.lib figcaption{padding:10px 12px;font-size:13px}
+.cap{grid-template-columns:1fr 1fr;margin-top:18px}
+.cap ul{margin:0;padding:0;list-style:none}.cap li{padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;line-height:1.45}.cap li:last-child{border:0}
+.toast{position:fixed;left:50%;bottom:calc(24px + var(--sab));transform:translateX(-50%) translateY(200%);background:var(--navy);color:#fff;border-radius:999px;padding:12px 20px;font-weight:600;font-size:14px;transition:transform .3s;z-index:30;max-width:calc(100% - 32px);text-align:center}
+.toast.on{transform:translateX(-50%)}
+.mtop{display:none}
+@media (max-width:960px){
+ .login{grid-template-columns:1fr}.login .art{min-height:220px}.login .art h1{font-size:36px}.login .art div{left:22px;right:22px;bottom:22px}.login .box{padding:26px 20px 40px}
+ .app{grid-template-columns:1fr}.side{display:none}
+ .mtop{display:flex;position:sticky;top:0;z-index:15;background:var(--navy-3);padding:8px 10px;gap:8px;align-items:center}
+ .mtop select{flex:1;min-height:44px;border-radius:12px;background:var(--navy-2);color:#fff;border:1px solid rgba(255,255,255,.2);padding:0 12px;font-weight:700;font-size:16px}
+ .mtop img{height:32px;width:auto}
+ main{padding:18px 16px calc(60px + var(--sab))}
+ .top h1{font-size:28px}
+ .kpis{grid-template-columns:1fr 1fr}.split,.trio,.cap{grid-template-columns:1fr}.f2{grid-template-columns:1fr}
+ .tbl{overflow-x:auto;margin-inline:-4px}
+ table.resp thead{display:none}table.resp tr{display:block;border-bottom:1px solid var(--line);padding:8px 0}table.resp td{display:flex;justify-content:space-between;gap:12px;border:0;padding:5px 2px;text-align:right}table.resp td::before{content:attr(data-l);color:var(--ink-2);font-size:13px;text-align:left}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="demo-bar">Démonstration · données fictives · rien n'est publié ni envoyé · <a href="index.html">retour au site</a></div>
+
+<section class="login" id="login" aria-labelledby="lh">
+  <div class="art"><img class="ph" src="img/hero-a.webp" alt=""><div><img src="img/nr-reversed.svg" alt="Nouvelle Responsabilité" style="height:56px"><h1>Espace d'administration</h1></div></div>
+  <form class="box" id="loginForm">
+    <h2 id="lh">Connexion de démonstration</h2>
+    <p style="color:var(--ink-2);line-height:1.6;margin:10px 0 0">Choisissez un rôle fictif. Chaque rôle voit et peut faire des choses différentes.</p>
+    <fieldset class="role"><legend class="sr" style="position:absolute;left:-9999px">Rôle</legend>
+      <label><input type="radio" name="role" value="editor"><div><b>Éditeur</b><span>Rédige les actualités, les événements et les traductions. Ne publie pas.</span></div></label>
+      <label><input type="radio" name="role" value="members"><div><b>Responsable adhésions</b><span>Examine les demandes d'adhésion.</span></div></label>
+      <label><input type="radio" name="role" value="admin" checked><div><b>Administrateur</b><span>Publie, gère les comptes et voit le journal.</span></div></label>
+    </fieldset>
+    <div class="prodnote"><span class="tag t-prod">Production</span><span>Identifiant, mot de passe et double authentification seront exigés. Ici, aucun mot de passe.</span></div>
+    <button class="btn navy" style="margin-top:20px" type="submit">Entrer dans la démonstration</button>
+  </form>
+</section>
+
+<div class="app" id="app" hidden>
+  <nav class="side" id="side" aria-label="Administration"></nav>
+  <div style="min-width:0">
+    <div class="mtop"><img src="img/nr-symbol.svg" alt=""><label class="sr" for="mnav" style="position:absolute;left:-9999px">Section</label><select id="mnav"></select></div>
+    <main id="view" tabindex="-1"></main>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+'use strict';
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+const store={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const ROLES={editor:'Éditeur',members:'Responsable adhésions',admin:'Administrateur'};
+const NAV=[
+ ['g','Contenus'],['tableau','Tableau de bord',['editor','members','admin']],['actualites','Actualités',['editor','admin']],['evenements','Événements',['editor','admin']],['apercu','Aperçu multilingue',['editor','admin']],['medias','Médiathèque',['editor','admin']],
+ ['g','Membres'],['adhesions','Adhésions',['members','admin']],
+ ['g','Gestion'],['roles','Utilisateurs et rôles',['admin']],['verification','Vérification des contenus',['admin']],['journal','Journal',['admin']],['capacites','Démo ou production ?',['editor','members','admin']]
+];
+const can=v=>{const n=NAV.find(x=>x[0]===v);return n&&n[2]&&n[2].includes(role)};
+let role=store.get('nr-admin-role');if(!ROLES[role])role=null;
+let view=(location.hash||'').slice(1)||'tableau';
+
+/* ---------- synthetic data (persisted locally) ---------- */
+const D0={
+ news:[
+  {id:'N1',title:{fr:'[Exemple] Rencontre avec les militants de Thiès',en:'[Sample] Meeting party members in Thiès',wo:''},body:{fr:"Texte fictif utilisé pour la démonstration du circuit de publication.",en:'Placeholder text used to demonstrate the publishing workflow.',wo:''},cat:'Actualité',st:'review',by:'Éditeur',tr:{en:'ok',wo:'todo'}},
+  {id:'N2',title:{fr:'[Exemple] Compte rendu de la permanence de Kaolack',en:'',wo:''},body:{fr:'Texte fictif.',en:'',wo:''},cat:'Actualité',st:'draft',by:'Éditeur',tr:{en:'todo',wo:'todo'}},
+  {id:'N3',title:{fr:'[Exemple] Galerie photos — rencontre régionale',en:'[Sample] Photo gallery — regional meeting',wo:'[Misaal] Nataal yi'},body:{fr:'Texte fictif.',en:'Placeholder text.',wo:'Mbind mu misaal.'},cat:'Galerie',st:'pub',by:'Administrateur',tr:{en:'ok',wo:'rev'}}
+ ],
+ apps:[
+  {id:'D-0142',name:'Exemple A. Diallo',contact:'+221 77 000 00 01',where:'Thiès',date:'2026-11-19',status:'pending',checks:{}},
+  {id:'D-0141',name:'Exemple F. Ndiaye',contact:'exemple1@demo.test',where:'Dakar',date:'2026-11-18',status:'pending',checks:{}},
+  {id:'D-0140',name:'Exemple M. Sarr',contact:'+221 76 000 00 02',where:'Kaolack',date:'2026-11-17',status:'approved',checks:{id:1,dup:1,consent:1},note:'Dossier complet (exemple).'},
+  {id:'D-0139',name:'Exemple K. Fall',contact:'exemple2@demo.test',where:'Diaspora · France',date:'2026-11-16',status:'pending',checks:{}},
+  {id:'D-0138',name:'Exemple S. Ba',contact:'+221 70 000 00 03',where:'Saint-Louis',date:'2026-11-15',status:'rejected',checks:{consent:1},note:'Doublon (exemple).'}
+ ],
+ events:[
+  {id:'E1',title:"[Exemple] Réunion d'information",date:'2026-12-06',time:'10:00',where:'Kaolack',st:'scheduled'},
+  {id:'E2',title:'[Exemple] Permanence ouverte',date:'2026-12-13',time:'15:00',where:'Ziguinchor',st:'draft'},
+  {id:'E3',title:'[Exemple] Rencontre diaspora en ligne',date:'2026-12-20',time:'18:00',where:'En ligne',st:'cancelled'}
+ ],
+ users:[
+  {u:'editeur.demo',name:'Compte éditeur (fictif)',role:'editor',region:'Toutes'},
+  {u:'adhesions.thies.demo',name:'Responsable Thiès (fictif)',role:'members',region:'Thiès'},
+  {u:'admin.demo',name:'Administrateur (fictif)',role:'admin',region:'Toutes'}
+ ],
+ log:[{t:'2026-11-21T08:10:00',who:'Système',what:'Données fictives initialisées'}]
+};
+let DB=store.get('nr-admin-db')||JSON.parse(JSON.stringify(D0));
+const save=()=>store.set('nr-admin-db',DB);
+function audit(what){DB.log.unshift({t:new Date().toISOString(),who:ROLES[role]+' (démo)',what});DB.log=DB.log.slice(0,80);save();}
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(t._);t._=setTimeout(()=>t.classList.remove('on'),2600);}
+const mask=c=>c.includes('@')?c.replace(/^(.).*(@.*)$/,'$1•••$2'):c.replace(/\d(?=[\d ]{3})/g,'•');
+const localApps=()=>(store.get('nr-demo-apps')||[]).map(a=>({id:'L-'+String(a.id).slice(-4),raw:a.id,name:a.name,contact:a.contact,where:a.where,date:(a.date||'').slice(0,10),status:a.status||'pending',checks:a.checks||{},note:a.note||'',local:true}));
+const allApps=()=>localApps().concat(DB.apps);
+function setApp(id,patch){if(id.startsWith('L-')){const L=store.get('nr-demo-apps')||[];const x=L.find(a=>'L-'+String(a.id).slice(-4)===id);if(x)Object.assign(x,patch);store.set('nr-demo-apps',L);}else{const x=DB.apps.find(a=>a.id===id);if(x)Object.assign(x,patch);save();}}
+const AST={pending:['À examiner','t-wait'],approved:['Approuvée','t-ok'],rejected:['Refusée','t-no']};
+const NST={draft:['Brouillon','t-draft'],review:['En relecture','t-rev'],pub:['Publié','t-ok']};
+const EST={draft:['Brouillon','t-draft'],scheduled:['Programmé','t-ok'],cancelled:['Annulé','t-no']};
+const TRS={ok:['Validée','t-ok'],rev:['À relire','t-rev'],todo:['À traduire','t-draft']};
+const REG=['Dakar','Diourbel','Fatick','Kaffrine','Kaolack','Kédougou','Kolda','Louga','Matam','Saint-Louis','Sédhiou','Tambacounda','Thiès','Ziguinchor','Diaspora','En ligne'];
+const tag=(a)=>'<span class="tag '+a[1]+'">'+a[0]+'</span>';
+const prod='<span class="tag t-prod" title="Nécessite l\'infrastructure de production">Production</span>';
+function head(t,sub,extra){return '<div class="top"><div><h1>'+t+'</h1>'+(sub?'<p>'+sub+'</p>':'')+'</div><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">'+(extra||'')+'</div></div>';}
+
+/* ---------- login / shell ---------- */
+$('#loginForm').addEventListener('submit',e=>{e.preventDefault();role=$('input[name=role]:checked').value;store.set('nr-admin-role',role);audit('Connexion à la démonstration');start();});
+function start(){$('#login').hidden=true;$('#app').hidden=false;go(view,true);}
+function go(v,first){if(!NAV.some(n=>n[0]===v&&n[2]))v='tableau';if(!can(v)){toast('Section non accessible pour le rôle '+ROLES[role]);v='tableau';}view=v;if(location.hash.slice(1)!==v)history.replaceState(null,'','#'+v);buildNav();render();if(!first)$('#view').focus({preventScroll:true});scrollTo(0,0);}
+addEventListener('hashchange',()=>{if(role)go(location.hash.slice(1)||'tableau')});
+function buildNav(){const s=$('#side');s.innerHTML='<img src="img/nr-reversed.svg" alt="Nouvelle Responsabilité">';const m=$('#mnav');m.innerHTML='';let og=null;
+ NAV.forEach(n=>{if(n[0]==='g'){const g=document.createElement('div');g.className='grp';g.textContent=n[1];s.appendChild(g);og=document.createElement('optgroup');og.label=n[1];m.appendChild(og);return;}
+  const a=document.createElement('a');a.href='#'+n[0];a.textContent=n[1];if(n[0]===view)a.setAttribute('aria-current','page');if(!n[2].includes(role)){a.classList.add('off');a.setAttribute('aria-disabled','true');a.title='Non accessible pour ce rôle';}
+  a.addEventListener('click',e=>{e.preventDefault();if(n[2].includes(role))go(n[0]);else toast('Non accessible pour le rôle '+ROLES[role]);});s.appendChild(a);
+  const o=document.createElement('option');o.value=n[0];o.textContent=n[1]+(n[2].includes(role)?'':' (non autorisé)');o.disabled=!n[2].includes(role);og.appendChild(o);});
+ m.value=view;m.onchange=()=>go(m.value);
+ const w=document.createElement('div');w.className='who';w.innerHTML='<b>'+esc(ROLES[role])+'</b>Session fictive<label style="display:block;margin-top:8px">Changer de rôle<select id="roleSw">'+Object.entries(ROLES).map(([k,v])=>'<option value="'+k+'"'+(k===role?' selected':'')+'>'+v+'</option>').join('')+'</select></label><button type="button" class="btn sm ghost" id="reset" style="margin-top:10px;width:100%">Réinitialiser la démo</button>';
+ s.appendChild(w);$('#roleSw').onchange=e=>{role=e.target.value;store.set('nr-admin-role',role);audit('Changement de rôle de session');toast('Vous êtes maintenant : '+ROLES[role]);go(can(view)?view:'tableau');};
+ $('#reset').onclick=()=>{DB=JSON.parse(JSON.stringify(D0));save();toast('Données fictives réinitialisées');render();};}
+
+/* ---------- views ---------- */
+const V={};
+V.tableau=()=>{const A=allApps();
+ return head('Tableau de bord','Bonjour — session « '+esc(ROLES[role])+' »','<span class="tag t-demo">Données fictives</span>')+
+ '<div class="grid kpis">'+
+ '<div class="card kpi"><b>'+A.filter(a=>a.status==='pending').length+'</b><span>Demandes à examiner</span></div>'+
+ '<div class="card kpi"><b>'+DB.news.filter(n=>n.st==='review').length+'</b><span>Actualités en relecture</span></div>'+
+ '<div class="card kpi"><b>'+DB.events.filter(e=>e.st==='scheduled').length+'</b><span>Événements programmés</span></div>'+
+ '<div class="card kpi"><b>'+localApps().length+'</b><span>Demandes faites sur le site (ce navigateur)</span></div></div>'+
+ '<div class="split"><div class="card"><h2 class="s">À faire</h2>'+
+ [['adhesions','Examiner les demandes en attente',A.filter(a=>a.status==='pending').length],['actualites','Relire et publier les actualités',DB.news.filter(n=>n.st==='review').length],['evenements','Programmer les événements en brouillon',DB.events.filter(e=>e.st==='draft').length],['apercu','Vérifier les traductions à relire',DB.news.filter(n=>n.tr.wo!=='ok'||n.tr.en!=='ok').length]]
+  .map(x=>'<div class="list-item"><div><b>'+x[1]+'</b><small>'+x[2]+' élément(s)</small></div>'+(can(x[0])?'<a class="btn sm navy" href="#'+x[0]+'">Ouvrir</a>':'<span class="tag t-draft">Autre rôle</span>')+'</div>').join('')+
+ '</div><div class="card"><h2 class="s">Activité récente</h2><div class="log">'+DB.log.slice(0,6).map(l=>'<div><time>'+new Date(l.t).toLocaleString('fr-FR',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'})+'</time><span>'+esc(l.what)+'</span></div>').join('')+'</div></div></div>';};
+
+/* news: list + editor */
+let editId=null,edLang='fr';
+V.actualites=()=>{const n=editId?DB.news.find(x=>x.id===editId):null;
+ const list='<div class="card"><h2 class="s">Actualités</h2>'+DB.news.map(x=>'<div class="list-item"><div><b>'+esc(x.title.fr||'(sans titre)')+'</b><small>'+esc(x.cat)+' · '+esc(x.by)+'</small></div><div class="acts">'+tag(NST[x.st])+'<button class="btn sm ghost" data-edit="'+x.id+'">Modifier</button></div></div>').join('')+'</div>';
+ const ed=n||{id:'',title:{fr:'',en:'',wo:''},body:{fr:'',en:'',wo:''},cat:'Actualité',st:'draft',tr:{en:'todo',wo:'todo'}};
+ const editor='<form class="card" id="newsForm" novalidate><h2 class="s">'+(n?'Modifier '+esc(n.id):'Nouvelle actualité')+'</h2>'+
+  '<div class="ltabs" role="tablist" aria-label="Langue du contenu">'+['fr','wo','en'].map(l=>'<button type="button" role="tab" data-l="'+l+'" aria-selected="'+(edLang===l)+'">'+l.toUpperCase()+'</button>').join('')+'</div>'+
+  '<label class="f">Titre ('+edLang.toUpperCase()+')<input name="title" value="'+esc(ed.title[edLang])+'" maxlength="140"></label><div class="err" id="eTitle"></div>'+
+  '<label class="f">Texte ('+edLang.toUpperCase()+')<textarea name="body">'+esc(ed.body[edLang])+'</textarea></label>'+
+  '<div class="f2"><label class="f">Catégorie<select name="cat">'+['Actualité','Communiqué','Discours','Galerie','Vidéo'].map(c=>'<option'+(c===ed.cat?' selected':'')+'>'+c+'</option>').join('')+'</select></label>'+
+  '<label class="f">Statut<input value="'+NST[ed.st][0]+'" disabled></label></div>'+
+  '<div class="acts" style="margin-top:18px"><button class="btn" type="submit">Enregistrer</button>'+
+  (n&&n.st==='draft'?'<button class="btn navy" type="button" id="toReview">Soumettre en relecture</button>':'')+
+  (n&&n.st==='review'?(role==='admin'?'<button class="btn navy" type="button" id="publish">Publier (démo)</button>':'<span class="tag t-rev">En attente de l\'administrateur</span>')+'<button class="btn ghost" type="button" id="toDraft">Renvoyer en brouillon</button>':'')+
+  (n&&n.st==='pub'&&role==='admin'?'<button class="btn ghost" type="button" id="unpub">Dépublier</button>':'')+
+  (n?'<button class="btn ghost" type="button" id="newN">+ Nouvelle</button>':'')+'</div>'+
+  '<p class="note">« Publier » change le statut dans la démonstration uniquement ; le site public n\'est pas modifié. '+prod+' publication réelle sur le site.</p></form>';
+ return head('Actualités','Créer, modifier, relire et publier — circuit Brouillon → En relecture → Publié','<span class="tag t-demo">Données fictives</span>')+'<div class="split">'+editor+list+'</div>';};
+function bindNews(v){
+ $$('[data-edit]',v).forEach(b=>b.onclick=()=>{editId=b.dataset.edit;edLang='fr';render();});
+ $$('.ltabs [data-l]',v).forEach(b=>b.onclick=()=>{stash(v);edLang=b.dataset.l;render();});
+ const f=$('#newsForm',v);if(!f)return;
+ f.onsubmit=e=>{e.preventDefault();let title=f.title.value.trim();if(edLang==='fr'&&title&&!/^\[Exemple\]/i.test(title))title='[Exemple] '+title;if(edLang==='fr'&&title.length<5){$('#eTitle').textContent='Le titre français doit contenir au moins 5 caractères.';f.title.focus();return;}
+  let n=editId&&DB.news.find(x=>x.id===editId);
+  if(!n){if(edLang!=='fr'){$('#eTitle').textContent='Commencez par le titre français.';return;}n={id:'N'+(Date.now()%100000),title:{fr:'',en:'',wo:''},body:{fr:'',en:'',wo:''},cat:'Actualité',st:'draft',by:ROLES[role],tr:{en:'todo',wo:'todo'}};DB.news.unshift(n);editId=n.id;}
+  n.title[edLang]=title;n.body[edLang]=f.body.value;n.cat=f.cat.value;if(edLang!=='fr'&&title)n.tr[edLang]='rev';
+  audit((edLang==='fr'?'Actualité enregistrée : ':'Traduction '+edLang.toUpperCase()+' enregistrée : ')+'« '+n.title.fr+' »');save();toast('Enregistré');render();};
+ const mv=(id,st,msg)=>{const b=$('#'+id,v);if(b)b.onclick=()=>{const n=DB.news.find(x=>x.id===editId);n.st=st;audit('« '+n.title.fr+' » → '+NST[st][0]);save();toast(msg);render();};};
+ mv('toReview','review','Soumis en relecture');mv('publish','pub','Publié dans la démo');mv('toDraft','draft','Renvoyé en brouillon');mv('unpub','review','Dépublié');
+ const nn=$('#newN',v);if(nn)nn.onclick=()=>{editId=null;edLang='fr';render();};}
+function stash(v){const f=$('#newsForm',v);if(!f||!editId)return;const n=DB.news.find(x=>x.id===editId);if(n){n.title[edLang]=f.title.value;n.body[edLang]=f.body.value;save();}}
+
+/* applications: list + review panel */
+let appSel=null,af='pending';
+V.adhesions=()=>{const A=allApps();const list=A.filter(a=>af==='all'||a.status===af);const a=appSel&&A.find(x=>x.id===appSel);
+ const tbl=list.length?'<div class="tbl"><table class="resp"><thead><tr><th>Réf.</th><th>Nom</th><th>Territoire</th><th>Statut</th><th></th></tr></thead><tbody>'+list.map(x=>'<tr'+(x.id===appSel?' class="sel"':'')+'><td data-l="Réf.">'+esc(x.id)+(x.local?' <span class="tag t-local">site</span>':'')+'</td><td data-l="Nom">'+esc(x.name)+'</td><td data-l="Territoire">'+esc(x.where)+'</td><td data-l="Statut">'+tag(AST[x.status])+'</td><td data-l=""><button class="btn sm navy" data-open="'+esc(x.id)+'">Examiner</button></td></tr>').join('')+'</tbody></table></div>':'<div class="empty">Aucune demande dans ce filtre.</div>';
+ const panel=a?'<div class="card" id="appPanel"><h2 class="s">Demande '+esc(a.id)+'</h2>'+tag(AST[a.status])+(a.local?' <span class="tag t-local">créée sur le site, dans ce navigateur</span>':' <span class="tag t-demo">fictive</span>')+
+  '<dl class="kv"><dt>Nom</dt><dd>'+esc(a.name)+'</dd><dt>Contact</dt><dd><span id="ct">'+esc(mask(a.contact))+'</span> <button class="btn sm ghost" id="reveal" type="button">Afficher</button></dd><dt>Territoire</dt><dd>'+esc(a.where)+'</dd><dt>Reçue le</dt><dd>'+esc(a.date)+'</dd></dl>'+
+  '<h3 style="font-size:15px;margin:16px 0 4px">Contrôles</h3>'+[['id',"Identité vérifiée (pièce présentée à la permanence)"],['dup','Pas de doublon dans le fichier'],['consent','Consentement enregistré']].map(c=>'<label class="check"><input type="checkbox" data-ck="'+c[0]+'"'+(a.checks[c[0]]?' checked':'')+(a.status!=='pending'?' disabled':'')+'>'+c[1]+'</label>').join('')+
+  '<label class="f">Note interne<textarea id="anote" style="min-height:70px"'+(a.status!=='pending'?' disabled':'')+'>'+esc(a.note||'')+'</textarea></label><div class="err" id="aerr"></div>'+
+  '<div class="acts" style="margin-top:12px">'+(a.status==='pending'?'<button class="btn" id="approve" type="button">Approuver</button><button class="btn red" id="reject" type="button">Refuser</button>':'<button class="btn ghost" id="reopen" type="button">Rouvrir</button>')+(a.local?'<button class="btn ghost" id="erase" type="button">Effacer de ce navigateur</button>':'')+'</div>'+
+  '<p class="note">'+prod+' notification au demandeur et carte de membre. Dans la démo, aucune notification n\'est envoyée.</p></div>'
+  :'<div class="card empty">Choisissez une demande à examiner.</div>';
+ return head('Adhésions','Examiner une demande, cocher les contrôles, décider','<span class="tag t-demo">Données fictives</span>')+
+  '<div class="chips" role="group" aria-label="Filtrer">'+[['pending','À examiner'],['approved','Approuvées'],['rejected','Refusées'],['all','Toutes']].map(([k,l])=>'<button type="button" data-f="'+k+'" aria-pressed="'+(af===k)+'">'+l+' ('+(k==='all'?A.length:A.filter(x=>x.status===k).length)+')</button>').join('')+'</div>'+
+  '<div class="split"><div class="card">'+tbl+'<p class="note">Coordonnées masquées par défaut. En production, chaque responsable ne voit que sa région et chaque consultation est journalisée.</p></div>'+panel+'</div>';};
+function bindApps(v){
+ $$('.chips [data-f]',v).forEach(b=>b.onclick=()=>{af=b.dataset.f;render();});
+ $$('[data-open]',v).forEach(b=>b.onclick=()=>{appSel=b.dataset.open;render();const p=$('#appPanel');if(p&&innerWidth<960)p.scrollIntoView({block:'start'});});
+ const a=appSel&&allApps().find(x=>x.id===appSel);if(!a)return;
+ const rv=$('#reveal',v);if(rv)rv.onclick=()=>{$('#ct').textContent=a.contact;rv.remove();audit('Coordonnées consultées : '+a.id);};
+ $$('[data-ck]',v).forEach(c=>c.onchange=()=>{const ch=Object.assign({},a.checks);ch[c.dataset.ck]=c.checked?1:0;setApp(a.id,{checks:ch});a.checks=ch;});
+ const dec=st=>{const note=$('#anote').value.trim();const ok=['id','dup','consent'].every(k=>a.checks[k]);
+  if(st==='approved'&&!ok){$('#aerr').textContent='Cochez les trois contrôles avant d\'approuver.';return;}
+  if(st==='rejected'&&note.length<3){$('#aerr').textContent='Indiquez un motif dans la note interne.';$('#anote').focus();return;}
+  setApp(a.id,{status:st,note});audit('Demande '+a.id+' : '+AST[st][0].toLowerCase());toast('Demande '+a.id+' : '+AST[st][0]);render();};
+ const ap=$('#approve',v);if(ap)ap.onclick=()=>dec('approved');const rj=$('#reject',v);if(rj)rj.onclick=()=>dec('rejected');
+ const ro=$('#reopen',v);if(ro)ro.onclick=()=>{setApp(a.id,{status:'pending'});audit('Demande '+a.id+' rouverte');render();};
+ const er=$('#erase',v);if(er)er.onclick=()=>{store.set('nr-demo-apps',(store.get('nr-demo-apps')||[]).filter(x=>x.id!==a.raw));audit('Demande '+a.id+' effacée de ce navigateur');appSel=null;toast('Effacée');render();};}
+
+/* events */
+let evEdit=null;
+V.evenements=()=>{const e=evEdit?DB.events.find(x=>x.id===evEdit):{title:'',date:'',time:'',where:'',st:'draft'};
+ return head('Événements','Créer, programmer, modifier ou annuler un événement','<span class="tag t-demo">Données fictives</span>')+
+ '<div class="split"><form class="card" id="evForm" novalidate><h2 class="s">'+(evEdit?'Modifier l\'événement':'Nouvel événement')+'</h2>'+
+ '<label class="f">Intitulé<input name="title" value="'+esc(e.title)+'" placeholder="[Exemple] …"></label>'+
+ '<div class="f2"><label class="f">Date<input type="date" name="date" value="'+esc(e.date)+'"></label><label class="f">Heure<input type="time" name="time" value="'+esc(e.time)+'"></label></div>'+
+ '<label class="f">Lieu<select name="where"><option value="">—</option>'+REG.map(r=>'<option'+(r===e.where?' selected':'')+'>'+r+'</option>').join('')+'</select></label>'+
+ '<div class="err" id="eerr"></div><div class="acts" style="margin-top:12px"><button class="btn" type="submit">'+(evEdit?'Enregistrer':'Créer en brouillon')+'</button>'+(evEdit?'<button class="btn ghost" type="button" id="evNew">Annuler la modification</button>':'')+'</div>'+
+ '<p class="note">Le titre doit commencer par « [Exemple] » dans la démonstration. '+prod+' affichage sur le site et rappels SMS.</p></form>'+
+ '<div class="card"><h2 class="s">Calendrier</h2>'+DB.events.slice().sort((a,b)=>a.date.localeCompare(b.date)).map(x=>'<div class="list-item"><div><b>'+esc(x.title)+'</b><small>'+esc(new Date(x.date+'T12:00').toLocaleDateString('fr-FR',{weekday:'short',day:'numeric',month:'long'}))+' · '+esc(x.time)+' · '+esc(x.where)+'</small></div><div class="acts">'+tag(EST[x.st])+
+  (x.st==='draft'?'<button class="btn sm navy" data-sch="'+x.id+'">Programmer</button>':'')+(x.st==='scheduled'?'<button class="btn sm red" data-can="'+x.id+'">Annuler</button>':'')+(x.st==='cancelled'?'<button class="btn sm ghost" data-sch="'+x.id+'">Reprogrammer</button>':'')+'<button class="btn sm ghost" data-ev="'+x.id+'">Modifier</button></div></div>').join('')+'</div></div>';};
+function bindEvents(v){const f=$('#evForm',v);
+ f.onsubmit=e=>{e.preventDefault();let t=f.title.value.trim();if(t&&!/^\[Exemple\]/i.test(t))t='[Exemple] '+t;
+  if(t.length<12||!f.date.value||!f.time.value||!f.where.value){$('#eerr').textContent='Renseignez l\'intitulé, la date, l\'heure et le lieu.';return;}
+  if(evEdit){Object.assign(DB.events.find(x=>x.id===evEdit),{title:t,date:f.date.value,time:f.time.value,where:f.where.value});audit('Événement modifié : '+t);}
+  else{DB.events.push({id:'E'+(Date.now()%100000),title:t,date:f.date.value,time:f.time.value,where:f.where.value,st:'draft'});audit('Événement créé : '+t);}
+  evEdit=null;save();toast('Événement enregistré');render();};
+ const n=$('#evNew',v);if(n)n.onclick=()=>{evEdit=null;render();};
+ $$('[data-ev]',v).forEach(b=>b.onclick=()=>{evEdit=b.dataset.ev;render();$('#evForm').scrollIntoView({block:'start'});});
+ $$('[data-sch]',v).forEach(b=>b.onclick=()=>{const x=DB.events.find(e=>e.id===b.dataset.sch);x.st='scheduled';audit('Événement programmé : '+x.title);save();toast('Programmé');render();});
+ $$('[data-can]',v).forEach(b=>b.onclick=()=>{const x=DB.events.find(e=>e.id===b.dataset.can);x.st='cancelled';audit('Événement annulé : '+x.title);save();toast('Annulé');render();});}
+
+/* multilingual preview */
+let pvId=null;
+V.apercu=()=>{const n=DB.news.find(x=>x.id===pvId)||DB.news[0];pvId=n&&n.id;if(!n)return head('Aperçu multilingue')+'<div class="card empty">Aucune actualité.</div>';
+ const card=(l)=>{const has=!!n.title[l];const tt=has?n.title[l]:n.title.fr,bb=n.body[l]||n.body.fr;const st=l==='fr'?['Source','t-ok']:TRS[n.tr[l]||'todo'];
+  return '<div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><b>'+({fr:'Français',wo:'Wolof',en:'English'})[l]+'</b>'+tag(st)+'</div><div class="prev"><div class="ph"><span class="k">'+esc(n.cat)+'</span><h3>'+esc(tt)+'</h3></div><div class="pb">'+esc(bb)+'</div>'+(has?'':'<span class="fallback">Pas encore traduit : le site affichera la version française.</span>')+'</div>'+
+  (l!=='fr'&&has&&n.tr[l]!=='ok'&&role==='admin'?'<button class="btn sm" style="margin-top:10px" data-val="'+l+'">Valider la traduction</button>':'')+'</div>';};
+ return head('Aperçu multilingue','Voir une actualité telle qu\'elle apparaîtra en français, wolof et anglais','<span class="tag t-demo">Données fictives</span>')+
+ '<label class="f" style="max-width:520px">Actualité<select id="pvSel">'+DB.news.map(x=>'<option value="'+x.id+'"'+(x.id===pvId?' selected':'')+'>'+esc(x.title.fr)+'</option>').join('')+'</select></label>'+
+ '<div class="trio">'+['fr','wo','en'].map(card).join('')+'</div><p class="note">Pour traduire, ouvrez l\'actualité et choisissez l\'onglet WO ou EN. Le wolof doit être relu par un locuteur désigné par le parti avant validation.</p>';};
+function bindPreview(v){const s=$('#pvSel',v);if(s)s.onchange=()=>{pvId=s.value;render();};
+ $$('[data-val]',v).forEach(b=>b.onclick=()=>{const n=DB.news.find(x=>x.id===pvId);n.tr[b.dataset.val]='ok';audit('Traduction '+b.dataset.val.toUpperCase()+' validée : « '+n.title.fr+' »');save();toast('Traduction validée');render();});}
+
+/* users & roles */
+V.roles=()=>head('Utilisateurs et rôles','Attribuer un rôle à un compte de l\'équipe','<span class="tag t-demo">Comptes fictifs</span>')+
+ '<div class="split"><div class="card"><div class="tbl"><table class="resp"><thead><tr><th>Compte</th><th>Rôle</th><th>Périmètre</th></tr></thead><tbody>'+DB.users.map((u,i)=>'<tr><td data-l="Compte"><b>'+esc(u.u)+'</b><br><small style="color:var(--ink-2)">'+esc(u.name)+'</small></td><td data-l="Rôle"><select data-ur="'+i+'" aria-label="Rôle de '+esc(u.u)+'">'+Object.entries(ROLES).map(([k,v])=>'<option value="'+k+'"'+(k===u.role?' selected':'')+'>'+v+'</option>').join('')+'</select></td><td data-l="Périmètre"><select data-ug="'+i+'" aria-label="Périmètre de '+esc(u.u)+'">'+['Toutes'].concat(REG.slice(0,15)).map(r=>'<option'+(r===u.region?' selected':'')+'>'+r+'</option>').join('')+'</select></td></tr>').join('')+'</tbody></table></div></div>'+
+ '<form class="card" id="uForm" novalidate><h2 class="s">Ajouter un compte fictif</h2><label class="f">Identifiant<input name="u" placeholder="prenom.demo"><small>Lettres, chiffres et points ; finit par « .demo ».</small></label><label class="f">Rôle<select name="role">'+Object.entries(ROLES).map(([k,v])=>'<option value="'+k+'">'+v+'</option>').join('')+'</select></label><div class="err" id="uerr"></div><button class="btn" type="submit" style="margin-top:8px">Ajouter</button>'+
+ '<p class="note">'+prod+' invitation par e-mail, double authentification obligatoire, révocation immédiate des accès.</p></form></div>';
+function bindRoles(v){$$('[data-ur]',v).forEach(s=>s.onchange=()=>{const u=DB.users[s.dataset.ur];u.role=s.value;audit('Rôle de '+u.u+' → '+ROLES[u.role]);save();toast('Rôle mis à jour');});
+ $$('[data-ug]',v).forEach(s=>s.onchange=()=>{const u=DB.users[s.dataset.ug];u.region=s.value;audit('Périmètre de '+u.u+' → '+u.region);save();toast('Périmètre mis à jour');});
+ const f=$('#uForm',v);f.onsubmit=e=>{e.preventDefault();const u=f.u.value.trim().toLowerCase();if(!/^[a-z0-9.]{3,}\.demo$/.test(u)){$('#uerr').textContent='Identifiant invalide (ex. : awa.demo).';return;}if(DB.users.some(x=>x.u===u)){$('#uerr').textContent='Ce compte existe déjà.';return;}
+  DB.users.push({u,name:'Compte fictif',role:f.role.value,region:'Toutes'});audit('Compte ajouté : '+u+' ('+ROLES[f.role.value]+')');save();toast('Compte ajouté');render();};}
+
+const VER=[['Score présidentiel 2024 : 35,79 %, 1 605 086 voix','Conseil constitutionnel, décision 7/E/2024','ok'],['Lancement de NR le 9 septembre 2024 à Dakar','APS, 10 septembre 2024','ok'],['Nombre de députés de Jàmm ak Njariñ (7)','Résultats des législatives 2024 — à confirmer par le parti','rev'],['Six thèmes proposés au dialogue national 2025','Le Soleil, 18 mai 2025','ok'],['Formation (UCAD, ENAM) et date de naissance','Sources publiques — à confirmer par le parti','rev'],['Droits d\'utilisation des photographies','À confirmer par le parti','todo'],['Responsables, permanences et contacts régionaux','À fournir par le parti — rien n\'est publié','todo'],['Relecture du wolof','Locuteur à désigner par le parti','todo']];
+V.verification=()=>head('Vérification des contenus','Ce qui est sourcé et ce que le parti doit confirmer avant mise en ligne')+'<div class="card tbl" style="margin-top:18px"><table class="resp"><thead><tr><th>Information</th><th>Source</th><th>Statut</th></tr></thead><tbody>'+VER.map(v=>'<tr><td data-l="Information">'+esc(v[0])+'</td><td data-l="Source">'+esc(v[1])+'</td><td data-l="Statut">'+tag([{ok:'Sourcée',rev:'À confirmer',todo:'En attente du parti'}[v[2]],{ok:'t-ok',rev:'t-rev',todo:'t-wait'}[v[2]]])+'</td></tr>').join('')+'</tbody></table></div>';
+const IM=[['hero-a','Portrait assis','Accueil'],['hero-b','Devant un drapeau','Accueil'],['bio-portrait','Portrait officiel','Biographie'],['speak-hand','Prise de parole','Médias (exemple)'],['celebration','Rassemblement','Adhésion (fond)']];
+V.medias=()=>head('Médiathèque','Photos utilisées et emplacements','<span class="tag t-rev">Droits à confirmer</span>')+'<div class="grid lib">'+IM.map(m=>'<figure><img src="img/'+m[0]+'.webp" alt="'+m[1]+'" loading="lazy"><figcaption><b>'+m[1]+'</b><br><small style="color:var(--ink-2)">'+m[2]+'</small></figcaption></figure>').join('')+'</div><p class="note">Aucune légende, date ou lieu n\'est attribué aux photos tant que le parti ne les a pas fournis. '+prod+' téléversement et recadrage.</p>';
+V.journal=()=>head('Journal','Chaque action de la démonstration est enregistrée')+'<div class="card log" style="margin-top:18px">'+DB.log.map(l=>'<div><time>'+new Date(l.t).toLocaleString('fr-FR')+'</time><span><b>'+esc(l.who)+'</b> — '+esc(l.what)+'</span></div>').join('')+'</div><p class="note">'+prod+' journal conservé côté serveur et non modifiable.</p>';
+V.capacites=()=>head('Démonstration ou production ?','Ce qui fonctionne réellement ici, et ce qui demandera un serveur')+'<div class="grid cap"><div class="card"><h2 class="s">Fonctionne dans la démonstration</h2><ul>'+
+ ['Rédiger, modifier, traduire une actualité ; circuit Brouillon → Relecture → Publié','Examiner une demande : contrôles, note, approbation ou refus avec motif','Recevoir les demandes faites sur le site (dans ce navigateur)','Créer, programmer, modifier, annuler un événement','Comparer une actualité en français, wolof et anglais ; valider une traduction','Attribuer rôles et périmètres ; ajouter un compte fictif','Droits par rôle (menus inaccessibles grisés)','Journal de toutes les actions'].map(x=>'<li>✓ '+x+'</li>').join('')+'</ul></div>'+
+ '<div class="card"><h2 class="s">Nécessite la production</h2><ul>'+
+ ['Comptes réels, mot de passe, double authentification','Base de données sécurisée et sauvegardes (au lieu du navigateur)','Publication réelle sur le site public','Envoi de notifications (e-mail, SMS, WhatsApp)','Téléversement de photos et vidéos','Hébergement et déclaration conformes à la loi 2008-12 (CDP)','Journal d\'audit serveur non modifiable'].map(x=>'<li>'+prod+' '+x+'</li>').join('')+'</ul></div></div><p class="note">Toutes les données de la démonstration restent dans ce navigateur (stockage local). Rien n\'est transmis à un serveur ni au parti.</p>';
+
+function render(){const v=$('#view');v.innerHTML=V[view]();
+ ({actualites:bindNews,adhesions:bindApps,evenements:bindEvents,apercu:bindPreview,roles:bindRoles})[view]?.(v);}
+if(role)start();
+})();
+</script>
+</body>
+</html>
